@@ -1,4 +1,5 @@
 ﻿using CourierService.Application.Abstractions;
+using CourierService.Application.Extensions;
 using CourierService.Domain.Entities;
 using CourierService.Domain.Entities.Dictionaries;
 using CourierService.Domain.ValueObjects.Dictionaries.PaymentMethod;
@@ -34,8 +35,6 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, str
     {
         ArgumentNullException.ThrowIfNull(request);
 
-        var paymentMethod = PaymentMethod.FromValue(new PaymentMethodCode(request.PaymentMethod));
-
         var packageInformation = new PackageInformation(SequentialGuid.Create(),
                                                         (PackageInformationShortDescription)request.ProductDescription,
                                                         new PackageInformationWeight(request.ProductWeight),
@@ -47,7 +46,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, str
                               (OrderReceiverName)request.ReceiverName,
                               (OrderReceiverAddress)request.ReceiverAddress,
                               new OrderDeliveryCost(request.DeliveryCost),
-                              paymentMethod,
+                              request.PaymentMethod.ToPaymentMethod(),
                               packageInformation,
                               OrderStatus.Created);
 

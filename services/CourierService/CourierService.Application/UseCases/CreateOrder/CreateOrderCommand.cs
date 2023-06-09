@@ -1,4 +1,6 @@
-﻿namespace CourierService.Application.UseCases.CreateOrder;
+﻿using CourierService.Application.Dtos;
+
+namespace CourierService.Application.UseCases.CreateOrder;
 
 /// <summary>
 /// Представляет команду создания заказа.
@@ -12,18 +14,14 @@
 /// <param name="ProductCost">Стоимость посылки.</param>
 /// <param name="ProductDescription">Описание посылки.</param>
 /// <param name="ProductWeight">Вес посылки.</param>
-/// <param name="OrderStatus">Статус заказа.</param>
-/// <param name="TrackNumber">Трек номер.</param>
 public record CreateOrderCommand(string SenderName,
                                  string SenderAddress,
                                  string ReceiverName,
                                  string ReceiverAddress,
                                  decimal DeliveryCost,
-                                 string PaymentMethod,
+                                 PaymentMethodCode PaymentMethod,
                                  decimal ProductCost,
                                  string ProductDescription,
-                                 int ProductWeight,
-                                 int OrderStatus,
-                                 Guid TrackNumber) : IRequest<string>
+                                 int ProductWeight) : IRequest<string>
 {
 }

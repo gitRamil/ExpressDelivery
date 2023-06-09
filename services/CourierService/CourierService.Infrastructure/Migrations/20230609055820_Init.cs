@@ -138,18 +138,18 @@ namespace CourierService.Infrastructure.Migrations
                     sender_id = table.Column<Guid>(type: "uuid", nullable: true, comment: "Идентификатор связанной цели"),
                     sender_address = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Адрес отправителя"),
                     sender_name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Имя отправителя"),
-                    track_number = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: true, comment: "Номер отслеживания")
+                    track_number = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Номер отслеживания")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_orders", x => x.id);
                     table.ForeignKey(
-                        name: "fk_orders_couriers_courier_id",
+                        name: "fk_orders_courier_courier_temp_id",
                         column: x => x.courier_id,
                         principalTable: "couriers",
                         principalColumn: "id");
                     table.ForeignKey(
-                        name: "fk_orders_order_statuses_order_status_id",
+                        name: "fk_orders_order_status_order_status_temp_id",
                         column: x => x.order_status_id,
                         principalTable: "order_statuses",
                         principalColumn: "id",

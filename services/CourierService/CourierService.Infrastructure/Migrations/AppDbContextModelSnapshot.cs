@@ -277,6 +277,7 @@ namespace CourierService.Infrastructure.Migrations
                         .HasComment("Имя отправителя");
 
                     b.Property<string>("TrackNumber")
+                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)")
                         .HasColumnName("track_number")
@@ -471,14 +472,14 @@ namespace CourierService.Infrastructure.Migrations
                     b.HasOne("CourierService.Domain.Entities.Courier", "Courier")
                         .WithMany()
                         .HasForeignKey("courier_id")
-                        .HasConstraintName("fk_orders_couriers_courier_id");
+                        .HasConstraintName("fk_orders_courier_courier_temp_id");
 
                     b.HasOne("CourierService.Domain.Entities.Dictionaries.OrderStatus", "OrderStatus")
                         .WithMany()
                         .HasForeignKey("order_status_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_orders_order_statuses_order_status_id");
+                        .HasConstraintName("fk_orders_order_status_order_status_temp_id");
 
                     b.HasOne("CourierService.Domain.Entities.PackageInformation", "PackageInformation")
                         .WithMany()
