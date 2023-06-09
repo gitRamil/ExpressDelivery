@@ -23,5 +23,5 @@ public enum PaymentMethodCode
     /// Онлайн.
     /// </summary>
     [EnumMember(Value = "online")]
-    Online,
+    Online
 }

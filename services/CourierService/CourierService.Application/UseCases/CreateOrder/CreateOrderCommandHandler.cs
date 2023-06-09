@@ -2,7 +2,6 @@
 using CourierService.Application.Extensions;
 using CourierService.Domain.Entities;
 using CourierService.Domain.Entities.Dictionaries;
-using CourierService.Domain.ValueObjects.Dictionaries.PaymentMethod;
 using CourierService.Domain.ValueObjects.Order;
 using CourierService.Domain.ValueObjects.PackageInformation;
 using Domain.Core.Primitives;

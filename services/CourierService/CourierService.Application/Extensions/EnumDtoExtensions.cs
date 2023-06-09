@@ -3,7 +3,6 @@ using CourierService.Domain.Entities.Dictionaries;
 
 namespace CourierService.Application.Extensions;
 
-
 /// <summary>
 /// Содержит набор методов расширения для работы c перечислениями.
 /// </summary>
