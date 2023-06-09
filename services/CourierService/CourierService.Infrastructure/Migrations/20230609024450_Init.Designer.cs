@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CourierService.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230609015709_Init")]
+    [Migration("20230609024450_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -352,24 +352,28 @@ namespace CourierService.Infrastructure.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("first_name")
                         .HasComment("Имя");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("text")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("last_name")
-                        .HasComment("Фамилия");
+                        .HasComment("Логин сотрудника");
 
                     b.Property<string>("Login")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("login")
-                        .HasComment("Логин пользователя");
+                        .HasComment("Логин сотрудника");
 
                     b.Property<string>("Mail")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("mail")
                         .HasComment("Эл. почта");
 

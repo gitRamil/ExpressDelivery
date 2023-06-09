@@ -75,10 +75,10 @@ namespace CourierService.Infrastructure.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    first_name = table.Column<string>(type: "text", nullable: false, comment: "Имя"),
-                    last_name = table.Column<string>(type: "text", nullable: true, comment: "Фамилия"),
-                    login = table.Column<string>(type: "text", nullable: false, comment: "Логин пользователя"),
-                    mail = table.Column<string>(type: "text", nullable: false, comment: "Эл. почта"),
+                    first_name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Имя"),
+                    last_name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: true, comment: "Логин сотрудника"),
+                    login = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Логин сотрудника"),
+                    mail = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Эл. почта"),
                     password_hash = table.Column<byte[]>(type: "bytea", nullable: false, comment: "Хеш пароля"),
                     password_salt = table.Column<byte[]>(type: "bytea", nullable: false, comment: "Соль пароля"),
                     phone = table.Column<string>(type: "text", nullable: true, comment: "Номер телефона"),

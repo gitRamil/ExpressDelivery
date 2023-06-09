@@ -3,6 +3,7 @@ using CourierService.Application.Abstractions;
 using CourierService.Application.Dtos;
 using CourierService.Domain.Entities;
 using CourierService.Domain.Entities.Dictionaries;
+using CourierService.Domain.ValueObjects.User;
 using Domain.Core.Primitives;
 
 namespace CourierService.Application.UseCases.CreateUser;
@@ -38,9 +39,9 @@ public class CreateUserHandler : IRequestHandler<CreateUserCommand, UserDto>
         ArgumentNullException.ThrowIfNull(request);
 
         var user = new User(SequentialGuid.Create(),
-                            "",
-                            "",
-                            "",
+                            new UserLogin(""),
+                            new UserMail(""),
+                            new UserFirstName(""),
                             new[]
                             {
                                 new byte()

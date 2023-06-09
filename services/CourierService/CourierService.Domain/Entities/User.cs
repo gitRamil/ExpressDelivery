@@ -1,4 +1,5 @@
 using CourierService.Domain.Entities.Dictionaries;
+using CourierService.Domain.ValueObjects.User;
 using Domain.Core;
 using Domain.Core.Primitives;
 
@@ -9,7 +10,26 @@ namespace CourierService.Domain.Entities;
 /// </summary>
 public class User : Entity<SequentialGuid>
 {
-    public User(SequentialGuid id, string login, string mail, string firstName, byte[] passwordHash, byte[] passwordSalt, Right right)
+    /// <summary>
+    /// Инициализирует новый экземпляр типа <see cref="User" />.
+    /// </summary>
+    /// <param name="id">Идентификатор.</param>
+    /// <param name="login">Логин.</param>
+    /// <param name="mail">Эл. почта.</param>
+    /// <param name="firstName">Имя.</param>
+    /// <param name="passwordHash">Хеш пароля.</param>
+    /// <param name="passwordSalt">Соль пароля.</param>
+    /// <param name="right">Права.</param>
+    /// <exception cref="ArgumentNullException">
+    /// Возникает, если <see cref="login" />
+    /// или <see cref="firstName" />
+    /// или <see cref="mail" />
+    /// или <see cref="firstName" />
+    /// или <see cref="passwordHash" />
+    /// или <see cref="passwordSalt" />
+    /// или <see cref="right" /> равно <c>null</c>.
+    /// </exception>
+    public User(SequentialGuid id, UserLogin login, UserMail mail, UserFirstName firstName, byte[] passwordHash, byte[] passwordSalt, Right right)
         : base(id)
     {
         Login = login ?? throw new ArgumentNullException(nameof(login));
@@ -38,22 +58,22 @@ public class User : Entity<SequentialGuid>
     /// <summary>
     /// Возвращает имя.
     /// </summary>
-    public string FirstName { get; set; }
+    public UserFirstName FirstName { get; set; }
 
     /// <summary>
     /// Возвращает фамилию.
     /// </summary>
-    public string? LastName { get; set; }
+    public UserLastName? LastName { get; set; }
 
     /// <summary>
     /// Возвращает логин пользователя.
     /// </summary>
-    public string Login { get; set; }
+    public UserLogin Login { get; set; }
 
     /// <summary>
     /// Возвращает эл. почту.
     /// </summary>
-    public string Mail { get; set; }
+    public UserMail Mail { get; set; }
 
     /// <summary>
     /// Возвращает хеш пароля.
@@ -68,7 +88,7 @@ public class User : Entity<SequentialGuid>
     /// <summary>
     /// Возвращает номер телефона.
     /// </summary>
-    public string? Phone { get; set; }
+    public UserPhone? Phone { get; set; }
 
     /// <summary>
     /// Возвращает рефреш-токен.
