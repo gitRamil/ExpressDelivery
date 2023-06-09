@@ -1,6 +1,5 @@
 ﻿using CourierService.Domain.Entities;
 using CourierService.Domain.ValueObjects.Courier;
-using CourierService.Domain.ValueObjects.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

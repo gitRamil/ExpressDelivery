@@ -27,7 +27,7 @@ public sealed class UserLogin : ValueObject
         {
             throw new ArgumentException("Логин сотрудника не может быть null или пустой строкой.", nameof(login));
         }
-        
+
         login = login.Trim();
 
         if (login.Length > MaxLength)

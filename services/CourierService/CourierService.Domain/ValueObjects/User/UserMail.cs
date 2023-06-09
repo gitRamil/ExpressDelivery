@@ -27,7 +27,7 @@ public sealed class UserMail : ValueObject
         {
             throw new ArgumentException("Почта сотрудника не может быть null или пустой строкой.", nameof(mail));
         }
-        
+
         mail = mail.Trim();
 
         if (mail.Length > MaxLength)

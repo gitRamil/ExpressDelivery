@@ -127,18 +127,18 @@ namespace CourierService.Infrastructure.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     courier_id = table.Column<Guid>(type: "uuid", nullable: true, comment: "Идентификатор курьера"),
-                    delivery_cost = table.Column<decimal>(type: "numeric", nullable: false, comment: "Цена доставки"),
+                    delivery_cost = table.Column<decimal>(type: "numeric", nullable: true, comment: "Цена доставки"),
                     delivery_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, comment: "Дата доставки"),
                     order_status_id = table.Column<Guid>(type: "uuid", nullable: false, comment: "Идентификатор статуса заказа"),
                     package_information_id = table.Column<Guid>(type: "uuid", nullable: false, comment: "Идентификатор посылки"),
                     payment_method_id = table.Column<Guid>(type: "uuid", nullable: false, comment: "Идентификатор метода оплаты"),
                     receiver_id = table.Column<Guid>(type: "uuid", nullable: true, comment: "Идентификатор получателя"),
-                    receiver_address = table.Column<string>(type: "text", nullable: false, comment: "Адрес получателя"),
-                    receiver_name = table.Column<string>(type: "text", nullable: false, comment: "Имя получателя"),
+                    receiver_address = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Адрес получателя"),
+                    receiver_name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Имя получателя"),
                     sender_id = table.Column<Guid>(type: "uuid", nullable: true, comment: "Идентификатор связанной цели"),
-                    sender_address = table.Column<string>(type: "text", nullable: false, comment: "Адрес отправителя"),
-                    sender_name = table.Column<string>(type: "text", nullable: false, comment: "Имя отправителя"),
-                    track_number = table.Column<Guid>(type: "uuid", nullable: false, comment: "Номер отслеживания")
+                    sender_address = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Адрес отправителя"),
+                    sender_name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Имя отправителя"),
+                    track_number = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: true, comment: "Номер отслеживания")
                 },
                 constraints: table =>
                 {

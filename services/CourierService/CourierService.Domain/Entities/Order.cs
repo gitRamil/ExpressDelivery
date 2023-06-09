@@ -1,4 +1,5 @@
 ﻿using CourierService.Domain.Entities.Dictionaries;
+using CourierService.Domain.ValueObjects.Order;
 using Domain.Core;
 using Domain.Core.Primitives;
 
@@ -11,11 +12,11 @@ public class Order : Entity<SequentialGuid>
 {
     public Order(SequentialGuid id,
                  User sender,
-                 string senderName,
-                 string senderAddress,
-                 string receiverName,
-                 string receiverAddress,
-                 decimal deliveryCost,
+                 OrderSenderName senderName,
+                 OrderSenderAddress senderAddress,
+                 OrderReceiverName receiverName,
+                 OrderReceiverAddress receiverAddress,
+                 OrderDeliveryCost deliveryCost,
                  PaymentMethod paymentMethod,
                  PackageInformation packageInformation,
                  OrderStatus orderStatus)
@@ -57,12 +58,12 @@ public class Order : Entity<SequentialGuid>
     /// <summary>
     /// Возвращает цену доставки.
     /// </summary>
-    public decimal DeliveryCost { get; }
+    public OrderDeliveryCost? DeliveryCost { get; }
 
     /// <summary>
     /// Возвращает информацию о дате доставки.
     /// </summary>
-    public DateTime? DeliveryDate { get; set; }
+    public OrderDeliveryDate? DeliveryDate { get; set; }
 
     /// <summary>
     /// Возвращает информацию о статусе заказа.
@@ -87,12 +88,12 @@ public class Order : Entity<SequentialGuid>
     /// <summary>
     /// Возвращает адрес получателя.
     /// </summary>
-    public string ReceiverAddress { get; }
+    public OrderReceiverAddress ReceiverAddress { get; }
 
     /// <summary>
     /// Возвращает имя получателя.
     /// </summary>
-    public string ReceiverName { get; }
+    public OrderReceiverName ReceiverName { get; }
 
     /// <summary>
     /// Возвращает отправителя.
@@ -102,15 +103,15 @@ public class Order : Entity<SequentialGuid>
     /// <summary>
     /// Возвращает адрес отправителя.
     /// </summary>
-    public string SenderAddress { get; }
+    public OrderSenderAddress SenderAddress { get; }
 
     /// <summary>
     /// Возвращает имя отправителя.
     /// </summary>
-    public string SenderName { get; }
+    public OrderSenderName SenderName { get; }
 
     /// <summary>
     /// Возвращает трек номер.
     /// </summary>
-    public Guid TrackNumber { get; } = Guid.NewGuid();
+    public OrderTrackNumber? TrackNumber { get; }
 }

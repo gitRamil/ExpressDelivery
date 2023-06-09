@@ -27,7 +27,7 @@ public sealed class PackageInformationShortDescription : ValueObject
         {
             throw new ArgumentException("Описание посылки не может быть null или пустой строкой.", nameof(shortDescription));
         }
-        
+
         shortDescription = shortDescription.Trim();
 
         if (shortDescription.Length > MaxLength)

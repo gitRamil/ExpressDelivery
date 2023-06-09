@@ -27,7 +27,7 @@ public sealed class CourierLongitude : ValueObject
         {
             throw new ArgumentException("Координата долготы курьера не может быть null или пустой строкой.", nameof(longitude));
         }
-        
+
         longitude = longitude.Trim();
 
         if (longitude.Length > MaxLength)

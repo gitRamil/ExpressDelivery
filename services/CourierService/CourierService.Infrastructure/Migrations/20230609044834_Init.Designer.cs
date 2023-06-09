@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CourierService.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230609041017_Init")]
+    [Migration("20230609044834_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -241,7 +241,7 @@ namespace CourierService.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<decimal>("DeliveryCost")
+                    b.Property<decimal?>("DeliveryCost")
                         .HasColumnType("numeric")
                         .HasColumnName("delivery_cost")
                         .HasComment("Цена доставки");
@@ -253,30 +253,35 @@ namespace CourierService.Infrastructure.Migrations
 
                     b.Property<string>("ReceiverAddress")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("receiver_address")
                         .HasComment("Адрес получателя");
 
                     b.Property<string>("ReceiverName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("receiver_name")
                         .HasComment("Имя получателя");
 
                     b.Property<string>("SenderAddress")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("sender_address")
                         .HasComment("Адрес отправителя");
 
                     b.Property<string>("SenderName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("sender_name")
                         .HasComment("Имя отправителя");
 
-                    b.Property<Guid>("TrackNumber")
-                        .HasColumnType("uuid")
+                    b.Property<string>("TrackNumber")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("track_number")
                         .HasComment("Номер отслеживания");
 

@@ -27,7 +27,7 @@ public sealed class CourierTelegramUserName : ValueObject
         {
             throw new ArgumentException("Ник в телеграмме не может быть null или пустой строкой.", nameof(telegramUserName));
         }
-        
+
         if (!telegramUserName.StartsWith("@"))
         {
             telegramUserName = "@" + telegramUserName;
