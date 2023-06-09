@@ -276,10 +276,8 @@ namespace CourierService.Infrastructure.Migrations
                         .HasColumnName("sender_name")
                         .HasComment("Имя отправителя");
 
-                    b.Property<string>("TrackNumber")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("character varying(250)")
+                    b.Property<Guid>("TrackNumber")
+                        .HasColumnType("uuid")
                         .HasColumnName("track_number")
                         .HasComment("Номер отслеживания");
 

@@ -19,9 +19,9 @@ public record CreateOrderCommand(string SenderName,
                                  string ReceiverName,
                                  string ReceiverAddress,
                                  decimal DeliveryCost,
-                                 PaymentMethodCode PaymentMethod,
+                                 PaymentMethodCodeEnum PaymentMethod,
                                  decimal ProductCost,
                                  string ProductDescription,
-                                 int ProductWeight) : IRequest<string>
+                                 int ProductWeight) : IRequest<Guid>
 {
 }

@@ -138,7 +138,7 @@ namespace CourierService.Infrastructure.Migrations
                     sender_id = table.Column<Guid>(type: "uuid", nullable: true, comment: "Идентификатор связанной цели"),
                     sender_address = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Адрес отправителя"),
                     sender_name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Имя отправителя"),
-                    track_number = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Номер отслеживания")
+                    track_number = table.Column<Guid>(type: "uuid", nullable: false, comment: "Номер отслеживания")
                 },
                 constraints: table =>
                 {

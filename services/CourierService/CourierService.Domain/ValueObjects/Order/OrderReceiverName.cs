@@ -38,6 +38,9 @@ public sealed class OrderReceiverName : ValueObject
         _receiverName = receiverName;
     }
 
+    /// <inheritdoc />
+    public override string ToString() => _receiverName;
+
     /// <summary>
     /// Возвращает набор компонентов, участвующий в сравнении.
     /// </summary>

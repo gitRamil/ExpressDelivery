@@ -113,6 +113,5 @@ public class Order : Entity<SequentialGuid>
     /// <summary>
     /// Возвращает трек номер.
     /// </summary>
-    public OrderTrackNumber TrackNumber { get; } = new(SequentialGuid.Create()
-                                                                     .ToString());
+    public SequentialGuid TrackNumber { get; } = SequentialGuid.Create();
 }

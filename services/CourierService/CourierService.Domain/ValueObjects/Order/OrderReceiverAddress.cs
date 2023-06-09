@@ -38,6 +38,9 @@ public sealed class OrderReceiverAddress : ValueObject
         _receiverAddress = receiverAddress;
     }
 
+    /// <inheritdoc />
+    public override string ToString() => _receiverAddress;
+
     /// <summary>
     /// Возвращает набор компонентов, участвующий в сравнении.
     /// </summary>

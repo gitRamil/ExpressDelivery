@@ -5,7 +5,7 @@ namespace CourierService.Application.Dtos;
 /// <summary>
 /// Представляет набор значений, описывающих метод оплаты.
 /// </summary>
-public enum PaymentMethodCode
+public enum PaymentMethodCodeEnum
 {
     /// <summary>
     /// Карта.

@@ -11,7 +11,7 @@ namespace CourierService.Application.UseCases.CreateOrder;
 /// <summary>
 /// Представляет обработчик команды создания цели.
 /// </summary>
-public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, string>
+public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Guid>
 {
     private readonly IAppDbContext _context;
 
@@ -30,7 +30,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, str
     /// <exception cref="ArgumentNullException">
     /// Возникает, если <paramref name="request" /> равен <c>null</c>.
     /// </exception>
-    public async Task<string> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
 
