@@ -29,7 +29,7 @@
 
     <ItemGroup>
         <Reference Include="Domain.Core">
-            <HintPath>..\..\libs\Domain.Core.dll</HintPath>
+            <HintPath>..\libs\Domain.Core.dll</HintPath>
         </Reference>
     </ItemGroup>
 </Project>
