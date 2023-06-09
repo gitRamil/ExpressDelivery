@@ -8,11 +8,11 @@ namespace CourierService.Application.Profiles;
 /// </summary>
 public class UserProfile : Profile
 {
-    /// <summary>
-    /// Инициализирует новый экземпляр типа <see cref="UserProfile" />.
-    /// </summary>
-    public UserProfile() =>
-        CreateMap<User, UserDto>()
-            .ForMember(dto => dto.Name, expression => expression.MapFrom(user => user.Name.Value))
-            .ForMember(dto => dto.Phone, expression => expression.MapFrom(user => user.Phone == null ? null : (string?)user.Phone));
+    // /// <summary>
+    // /// Инициализирует новый экземпляр типа <see cref="UserProfile" />.
+    // /// </summary>
+    // public UserProfile() =>
+    //     CreateMap<User, UserDto>()
+    //         .ForMember(dto => dto.Name, expression => expression.MapFrom(user => user.Name.Value))
+    //         .ForMember(dto => dto.Phone, expression => expression.MapFrom(user => user.Phone == null ? null : (string?)user.Phone));
 }

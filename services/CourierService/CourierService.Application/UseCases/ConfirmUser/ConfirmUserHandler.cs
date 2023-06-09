@@ -41,7 +41,7 @@ public class ConfirmUserHandler : IRequestHandler<ConfirmUserCommand>
             throw new NotFoundException(typeof(User), request.UserId);
         }
 
-        user.Confirm((UserPhone)request.UserPhone!);
+        // user.Confirm((UserPhone)request.UserPhone!);
 
         await _context.SaveChangesAsync(cancellationToken)
                       .ConfigureAwait(false);

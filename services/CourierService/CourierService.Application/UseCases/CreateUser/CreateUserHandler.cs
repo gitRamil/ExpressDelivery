@@ -2,6 +2,7 @@ using AutoMapper;
 using CourierService.Application.Abstractions;
 using CourierService.Application.Dtos;
 using CourierService.Domain.Entities;
+using CourierService.Domain.Entities.Dictionaries;
 using CourierService.Domain.ValueObjects;
 using Domain.Core.Primitives;
 
@@ -35,7 +36,7 @@ public class CreateUserHandler : IRequestHandler<CreateUserCommand, UserDto>
     public async Task<UserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
-        var user = new User(SequentialGuid.Create(), new UserName(request.UserName));
+        var user = new User(SequentialGuid.Create(), "", "", "", new []{new byte() }, new []{new byte()}, Right.User );
         _context.Users.Add(user);
 
         await _context.SaveChangesAsync(cancellationToken)

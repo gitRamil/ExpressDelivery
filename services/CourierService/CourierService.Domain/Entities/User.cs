@@ -1,50 +1,92 @@
-using CourierService.Domain.Enums;
-using CourierService.Domain.ValueObjects;
+using CourierService.Domain.Entities.Dictionaries;
 using Domain.Core;
 using Domain.Core.Primitives;
 
 namespace CourierService.Domain.Entities;
+
 /// <summary>
-/// Представляет пользователя.
+/// Представляет сущность пользователя.
 /// </summary>
 public class User : Entity<SequentialGuid>
 {
+    public User(SequentialGuid id, string login, string mail, string firstName, byte[] passwordHash, byte[] passwordSalt, Right right)
+        : base(id)
+    {
+        Login = login ?? throw new ArgumentNullException(nameof(login));
+        Mail = mail ?? throw new ArgumentNullException(nameof(mail));
+        FirstName = firstName ?? throw new ArgumentNullException(nameof(firstName));
+        PasswordHash = passwordHash ?? throw new ArgumentNullException(nameof(passwordHash));
+        PasswordSalt = passwordSalt ?? throw new ArgumentNullException(nameof(passwordSalt));
+        Right = right ?? throw new ArgumentNullException(nameof(right));
+    }
+
     /// <summary>
     /// Инициализирует новый экземпляр типа <see cref="User" />.
     /// </summary>
-    /// <param name="id">Идентификатор.</param>
-    /// <param name="name">Имя.</param>
-    /// <exception cref="System.ArgumentNullException">Возникает, если <see cref="name" /> равно <c>null</c></exception>
-    public User(SequentialGuid id, UserName name)
-        : base(id)
+    /// <remarks>Конструктор для EF.</remarks>
+    protected User()
+        : base(SequentialGuid.Empty)
     {
-        Name = name ?? throw new ArgumentNullException(nameof(name));
-        Status = UserStatus.Unverified;
+        Login = null!;
+        Mail = null!;
+        FirstName = null!;
+        PasswordHash = null!;
+        PasswordSalt = null!;
+        Right = null!;
     }
 
     /// <summary>
     /// Возвращает имя.
     /// </summary>
-    public UserName Name { get; }
+    public string FirstName { get; set; }
 
     /// <summary>
-    /// Возвращает телефон.
+    /// Возвращает фамилию.
     /// </summary>
-    public UserPhone? Phone { get; private set; }
+    public string? LastName { get; set; }
 
     /// <summary>
-    /// Возвращает статус.
+    /// Возвращает логин пользователя.
     /// </summary>
-    public UserStatus Status { get; private set; }
+    public string Login { get; set; }
 
     /// <summary>
-    /// Подтверждает пользователя.
+    /// Возвращает эл. почту.
     /// </summary>
-    /// <param name="phone">Телефон.</param>
-    /// <exception cref="ArgumentNullException">Возникает, если <see cref="phone" /> равен <c>null</c></exception>
-    public void Confirm(UserPhone phone)
-    {
-        Phone = phone ?? throw new ArgumentNullException(nameof(phone));
-        Status = UserStatus.Verified;
-    }
+    public string Mail { get; set; }
+
+    /// <summary>
+    /// Возвращает хеш пароля.
+    /// </summary>
+    public byte[] PasswordHash { get; set; }
+
+    /// <summary>
+    /// Возвращает соль пароля.
+    /// </summary>
+    public byte[] PasswordSalt { get; set; }
+
+    /// <summary>
+    /// Возвращает номер телефона.
+    /// </summary>
+    public string? Phone { get; set; }
+
+    /// <summary>
+    /// Возвращает рефреш-токен.
+    /// </summary>
+    public string RefreshToken { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Возвращает права пользователя.
+    /// </summary>
+    public virtual Right Right { get; }
+
+    /// <summary>
+    /// Возвращает дату создания токена.
+    /// </summary>
+    public DateTime TokenCreated { get; set; }
+
+    /// <summary>
+    /// Возвращает дату истечения токена.
+    /// </summary>
+    public DateTime TokenExpires { get; set; }
 }
