@@ -12,7 +12,8 @@ public class OrderStatus : Entity<SequentialGuid>
     /// <summary>
     /// Возвращает статус заказа: Назначен курьер.
     /// </summary>
-    public static readonly OrderStatus CourierAssigned = new(Guid.Parse("4fdc6d99-f3fd-49ee-8af9-6ac5531cc40e"),  new OrderStatusName("Курьер назначен"), new OrderStatusCode("courier_assigned"));
+    public static readonly OrderStatus CourierAssigned =
+        new(Guid.Parse("4fdc6d99-f3fd-49ee-8af9-6ac5531cc40e"), new OrderStatusName("Курьер назначен"), new OrderStatusCode("courier_assigned"));
 
     /// <summary>
     /// Возвращает статус заказа: Создан.
@@ -27,7 +28,9 @@ public class OrderStatus : Entity<SequentialGuid>
     /// <summary>
     /// Возвращает статус заказа: Выполняется.
     /// </summary>
-    public static readonly OrderStatus InProgress = new(Guid.Parse("32ba2971-2a5e-435b-87c7-f8022e901c63"), new OrderStatusName("Заказ в процессе"), new OrderStatusCode("in_progress")); 
+    public static readonly OrderStatus InProgress = new(Guid.Parse("32ba2971-2a5e-435b-87c7-f8022e901c63"),
+                                                        new OrderStatusName("Заказ в процессе"),
+                                                        new OrderStatusCode("in_progress"));
 
     private static readonly Dictionary<OrderStatusCode, OrderStatus> OrderStatuses = new()
     {

@@ -1,4 +1,5 @@
 ﻿using CourierService.Domain.Entities;
+using CourierService.Domain.ValueObjects.PackageInformation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,15 +18,17 @@ internal class PackageInformationConfiguration : EntityTypeConfigurationBase<Pac
     {
         builder.ToTable("package_information", t => t.HasComment("Информация о посылке"));
 
+        builder.Property(p => p.Weight)
+               .HasConversion(o => (int)o, s => new PackageInformationWeight(s))
+               .HasComment("Вес посылки");
+
         builder.Property(p => p.Cost)
-               .HasComment("Цена")
-               .HasColumnType("decimal(18,2)");
+               .HasConversion(o => (int)o, s => new PackageInformationCost(s))
+               .HasComment("Цена посылки");
 
         builder.Property(p => p.ShortDescription)
+               .HasMaxLength(PackageInformationShortDescription.MaxLength)
+               .HasConversion(o => (string)o, s => (PackageInformationShortDescription)s)
                .HasComment("Краткое описание");
-
-        builder.Property(p => p.Weight)
-               .HasComment("Вес")
-               .HasColumnType("decimal(18,2)");
     }
 }

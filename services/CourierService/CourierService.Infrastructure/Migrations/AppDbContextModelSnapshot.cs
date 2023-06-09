@@ -337,21 +337,22 @@ namespace CourierService.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<decimal>("Cost")
-                        .HasColumnType("decimal(18,2)")
+                    b.Property<int>("Cost")
+                        .HasColumnType("integer")
                         .HasColumnName("cost")
-                        .HasComment("Цена");
+                        .HasComment("Цена посылки");
 
                     b.Property<string>("ShortDescription")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("short_description")
                         .HasComment("Краткое описание");
 
-                    b.Property<decimal>("Weight")
-                        .HasColumnType("decimal(18,2)")
+                    b.Property<int>("Weight")
+                        .HasColumnType("integer")
                         .HasColumnName("weight")
-                        .HasComment("Вес");
+                        .HasComment("Вес посылки");
 
                     b.HasKey("Id")
                         .HasName("pk_package_information");

@@ -1,4 +1,5 @@
-﻿using Domain.Core;
+﻿using CourierService.Domain.ValueObjects.PackageInformation;
+using Domain.Core;
 using Domain.Core.Primitives;
 
 namespace CourierService.Domain.Entities;
@@ -8,26 +9,26 @@ namespace CourierService.Domain.Entities;
 /// </summary>
 public class PackageInformation : Entity<SequentialGuid>
 {
-    public PackageInformation(SequentialGuid id, string shortDescription, decimal weight, decimal cost)
+    public PackageInformation(SequentialGuid id, PackageInformationShortDescription shortDescription, PackageInformationWeight weight, PackageInformationCost cost)
         : base(id)
     {
         ShortDescription = shortDescription ?? throw new ArgumentNullException(nameof(shortDescription));
-        Weight = weight;
-        Cost = cost;
+        Weight = weight ?? throw new ArgumentNullException(nameof(weight));
+        Cost = cost ?? throw new ArgumentNullException(nameof(cost));
     }
 
     /// <summary>
     /// Возвращает цену.
     /// </summary>
-    public decimal Cost { get; }
+    public PackageInformationCost Cost { get; }
 
     /// <summary>
     /// Возвращает краткое описание.
     /// </summary>
-    public string ShortDescription { get; }
+    public PackageInformationShortDescription ShortDescription { get; }
 
     /// <summary>
     /// Возвращает вес.
     /// </summary>
-    public decimal Weight { get; }
+    public PackageInformationWeight Weight { get; }
 }

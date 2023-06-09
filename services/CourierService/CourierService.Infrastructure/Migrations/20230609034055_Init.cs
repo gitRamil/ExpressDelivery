@@ -32,9 +32,9 @@ namespace CourierService.Infrastructure.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    cost = table.Column<decimal>(type: "numeric(18,2)", nullable: false, comment: "Цена"),
-                    short_description = table.Column<string>(type: "text", nullable: false, comment: "Краткое описание"),
-                    weight = table.Column<decimal>(type: "numeric(18,2)", nullable: false, comment: "Вес")
+                    cost = table.Column<int>(type: "integer", nullable: false, comment: "Цена посылки"),
+                    short_description = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Краткое описание"),
+                    weight = table.Column<int>(type: "integer", nullable: false, comment: "Вес посылки")
                 },
                 constraints: table =>
                 {

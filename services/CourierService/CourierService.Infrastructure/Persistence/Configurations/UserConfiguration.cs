@@ -24,9 +24,6 @@ internal class UserConfiguration : EntityTypeConfigurationBase<User>
                .HasComment("Имя");
 
         builder.Property(p => p.LastName)
-               .HasComment("Фамилия");
-
-        builder.Property(p => p.LastName)
                .HasMaxLength(UserLastName.MaxLength)
                .HasConversion(o => (string?)o, s => (UserLastName?)s)
                .HasComment("Логин сотрудника");
