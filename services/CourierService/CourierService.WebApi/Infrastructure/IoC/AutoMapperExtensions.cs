@@ -1,6 +1,7 @@
 using CourierService.Application.Profiles;
 
 namespace CourierService.WebApi.Infrastructure.IoC;
+
 /// <summary>
 /// Содержит набор методов расширения для регистрации служб AutoMapper в контейнере внедрения зависимостей.
 /// </summary>

@@ -1,6 +1,7 @@
 using FluentValidation;
 
 namespace CourierService.Application.UseCases.CreateUser;
+
 /// <summary>
 /// Представляет валидатор для команды <see cref="CreateUserCommand" />.
 /// </summary>

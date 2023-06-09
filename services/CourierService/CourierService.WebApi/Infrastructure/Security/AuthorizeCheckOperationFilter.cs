@@ -1,14 +1,14 @@
+using System.Net;
+using System.Reflection;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Extensions;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Net;
-using System.Reflection;
-using CourierService.WebApi.Infrastructure.Options;
 using static CourierService.WebApi.Infrastructure.Options.IdentityProviderOptions;
 
 namespace CourierService.WebApi.Infrastructure.Security;
+
 /// <summary>
 /// Представляет операционный фильтр для операции.
 /// </summary>
@@ -17,7 +17,7 @@ internal sealed class AuthorizeCheckOperationFilter : IOperationFilter
 {
     #region Data
     #region Fields
-    private readonly IOptions<IdentityProviderOptions.ScopesOptions> _scopesOptions;
+    private readonly IOptions<ScopesOptions> _scopesOptions;
     #endregion
     #endregion
 
@@ -29,10 +29,7 @@ internal sealed class AuthorizeCheckOperationFilter : IOperationFilter
     /// <exception cref="ArgumentNullException">
     /// Возникает, если <paramref name="scopesOptions" /> равен <c>null</c>.
     /// </exception>
-    public AuthorizeCheckOperationFilter(IOptions<IdentityProviderOptions.ScopesOptions> scopesOptions)
-    {
-        _scopesOptions = scopesOptions ?? throw new ArgumentNullException(nameof(scopesOptions));
-    }
+    public AuthorizeCheckOperationFilter(IOptions<ScopesOptions> scopesOptions) => _scopesOptions = scopesOptions ?? throw new ArgumentNullException(nameof(scopesOptions));
     #endregion
 
     #region IOperationFilter members
@@ -50,6 +47,7 @@ internal sealed class AuthorizeCheckOperationFilter : IOperationFilter
                                        {
                                            Description = HttpStatusCode.Unauthorized.ToString()
                                        });
+
             operation.Responses.TryAdd(((int)HttpStatusCode.Forbidden).ToString(),
                                        new OpenApiResponse
                                        {
@@ -67,7 +65,8 @@ internal sealed class AuthorizeCheckOperationFilter : IOperationFilter
                             Type = ReferenceType.SecurityScheme,
                             Id = SecuritySchemeType.OAuth2.GetDisplayName()!
                         }
-                    }] = _scopesOptions.Value.Scopes.Select(s => s.Key).ToArray()
+                    }] = _scopesOptions.Value.Scopes.Select(s => s.Key)
+                                       .ToArray()
                 }
             };
         }

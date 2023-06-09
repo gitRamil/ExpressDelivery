@@ -2,6 +2,7 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace CourierService.WebApi.Infrastructure.Options;
+
 /// <summary>
 /// Представляет конфигурацию для <see cref="SwaggerUIOptions" />.
 /// </summary>
@@ -21,10 +22,8 @@ internal sealed class SwaggerUiOptionsConfigure : IConfigureOptions<SwaggerUIOpt
     /// <exception cref="ArgumentNullException">
     /// Возникает, если <paramref name="clientOptions" /> равен <c>null</c>.
     /// </exception>
-    public SwaggerUiOptionsConfigure(IOptions<IdentityProviderOptions.ClientOptions> clientOptions)
-    {
+    public SwaggerUiOptionsConfigure(IOptions<IdentityProviderOptions.ClientOptions> clientOptions) =>
         _clientOptions = clientOptions ?? throw new ArgumentNullException(nameof(clientOptions));
-    }
     #endregion
 
     #region IConfigureOptions<SwaggerUIOptions> members

@@ -1,8 +1,8 @@
 using AutoMapper;
-using CourierService.Application.Dtos;
 using CourierService.Domain.Entities;
 
 namespace CourierService.Application.Profiles;
+
 /// <summary>
 /// Представляет конфигурацию преобразования для типа <see cref="User" />.
 /// </summary>

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace CourierService.WebApi.Infrastructure.Middleware;
+
 /// <summary>
 /// Содержит настройки конфигурации для конечной точки HealthChecks.
 /// </summary>
@@ -42,18 +43,13 @@ public static class HealthCheckExtensions
         return endpointConventionBuilder;
     }
 
-    private static Func<HealthCheckRegistration, bool> GetFilter(Func<string, bool>? tagFilter)
-    {
-        return tagFilter is null ? _ => true : check => check.Tags.Any(tagFilter);
-    }
+    private static Func<HealthCheckRegistration, bool> GetFilter(Func<string, bool>? tagFilter) => tagFilter is null ? _ => true : check => check.Tags.Any(tagFilter);
 
-    private static IDictionary<HealthStatus, int> GetResultStatusCodes()
-    {
-        return new Dictionary<HealthStatus, int>
+    private static IDictionary<HealthStatus, int> GetResultStatusCodes() =>
+        new Dictionary<HealthStatus, int>
         {
             [HealthStatus.Healthy] = StatusCodes.Status200OK,
             [HealthStatus.Degraded] = StatusCodes.Status500InternalServerError,
             [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
         };
-    }
 }

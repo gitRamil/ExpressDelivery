@@ -1,8 +1,9 @@
 using FluentValidation;
 
 namespace CourierService.Application.UseCases.ConfirmUser;
+
 /// <summary>
-/// Представляет валидатор для команды <see cref="ConfirmUserCommand"/>.
+/// Представляет валидатор для команды <see cref="ConfirmUserCommand" />.
 /// </summary>
 public class ConfirmUserCommandValidator : AbstractValidator<ConfirmUserCommand>
 {
@@ -12,6 +13,7 @@ public class ConfirmUserCommandValidator : AbstractValidator<ConfirmUserCommand>
     public ConfirmUserCommandValidator()
     {
         const string pattern = "^\\+[7]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}$";
+
         RuleFor(p => p.UserPhone)
             .Cascade(CascadeMode.Stop)
             .NotNull()

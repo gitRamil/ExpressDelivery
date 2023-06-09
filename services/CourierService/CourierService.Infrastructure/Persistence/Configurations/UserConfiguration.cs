@@ -1,5 +1,4 @@
 using CourierService.Domain.Entities;
-using CourierService.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -56,4 +55,3 @@ internal class UserConfiguration : EntityTypeConfigurationBase<User>
                .HasComment("Дата истечения токена");
     }
 }
-

@@ -6,6 +6,7 @@ using CourierService.Application.UseCases.GetUserById;
 using MediatR;
 
 namespace CourierService.WebApi.Controllers;
+
 /// <summary>
 /// Представляет конечную точку по взаимодействию с пользователями.
 /// </summary>

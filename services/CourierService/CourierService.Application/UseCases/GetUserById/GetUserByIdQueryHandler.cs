@@ -6,6 +6,7 @@ using CourierService.Domain.Entities;
 using Domain.Core.Primitives;
 
 namespace CourierService.Application.UseCases.GetUserById;
+
 /// <summary>
 /// Представляет обработчик, осуществляющий возвращение пользователя.
 /// </summary>

@@ -1,13 +1,14 @@
-using Flurl;
+using System.Reflection;
 using CourierService.Application.Behaviors;
+using CourierService.WebApi.Infrastructure.Security;
+using Flurl;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Extensions;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Reflection;
-using CourierService.WebApi.Infrastructure.Security;
 
 namespace CourierService.WebApi.Infrastructure.Options;
+
 /// <summary>
 /// Представляет конфигурацию для <see cref="SwaggerGenOptions" />.
 /// </summary>
@@ -47,7 +48,9 @@ internal sealed class SwaggerGenOptionsConfigure : IConfigureOptions<SwaggerGenO
         AddXmlComments(swaggerGenOptions);
     }
 
-    private static void AddSecurity(SwaggerGenOptions target, IOptions<IdentityProviderOptions.AuthorityOptions> authorityOptions, IOptions<IdentityProviderOptions.ScopesOptions> scopesOptions)
+    private static void AddSecurity(SwaggerGenOptions target,
+                                    IOptions<IdentityProviderOptions.AuthorityOptions> authorityOptions,
+                                    IOptions<IdentityProviderOptions.ScopesOptions> scopesOptions)
     {
         var name = SecuritySchemeType.OAuth2.GetDisplayName()!;
 

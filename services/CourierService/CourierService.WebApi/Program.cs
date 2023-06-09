@@ -1,6 +1,6 @@
-using Hellang.Middleware.ProblemDetails;
 using CourierService.WebApi.Infrastructure.Middleware;
 using CourierService.WebApi.Infrastructure.Security;
+using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.HttpOverrides;
 using Serilog;
 

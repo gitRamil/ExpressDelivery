@@ -1,6 +1,7 @@
 using System.Runtime.Serialization;
 
 namespace CourierService.Application.Exceptions;
+
 /// <summary>
 /// Представляет исключение, возникающее в случае, когда запрашиваемая сущность не найдена.
 /// </summary>

@@ -1,7 +1,8 @@
-using FluentValidation;
 using CourierService.Application.Behaviors;
+using FluentValidation;
 
 namespace CourierService.WebApi.Infrastructure.IoC;
+
 /// <summary>
 /// Содержит набор методов расширения для регистрации служб FluentValidation в контейнере внедрения зависимостей.
 /// </summary>

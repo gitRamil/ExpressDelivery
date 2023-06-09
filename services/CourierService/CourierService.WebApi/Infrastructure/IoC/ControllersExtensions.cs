@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 
 namespace CourierService.WebApi.Infrastructure.IoC;
+
 /// <summary>
 /// Содержит набор методов расширения для регистрации служб MVC в контейнере внедрения зависимостей.
 /// </summary>

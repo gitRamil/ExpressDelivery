@@ -1,6 +1,7 @@
 using CourierService.Application.Dtos;
 
 namespace CourierService.Application.UseCases.CreateUser;
+
 /// <summary>
 /// Представляет команду на создание пользователя.
 /// </summary>

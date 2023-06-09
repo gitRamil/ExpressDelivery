@@ -1,6 +1,7 @@
 namespace CourierService.Domain.Enums;
+
 /// <summary>
-/// Содержит набор значений, представляющих статусы пользователя <see cref="User"/>.
+/// Содержит набор значений, представляющих статусы пользователя <see cref="User" />.
 /// </summary>
 public enum UserStatus
 {
@@ -12,5 +13,5 @@ public enum UserStatus
     /// <summary>
     /// Подтвержденный.
     /// </summary>
-    Verified = 1,
+    Verified = 1
 }

@@ -1,10 +1,10 @@
 using CourierService.Application.Abstractions;
 using CourierService.Application.Exceptions;
 using CourierService.Domain.Entities;
-using CourierService.Domain.ValueObjects;
 using Domain.Core.Primitives;
 
 namespace CourierService.Application.UseCases.ConfirmUser;
+
 /// <summary>
 /// Представляет обработчик, осуществляющий подтверждение пользователя.
 /// </summary>

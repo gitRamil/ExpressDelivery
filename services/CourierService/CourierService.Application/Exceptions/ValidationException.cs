@@ -1,6 +1,7 @@
 using System.Runtime.Serialization;
 
 namespace CourierService.Application.Exceptions;
+
 /// <summary>
 /// Представляет исключение, возникающее в случае обнаружения ошибок достоверности.
 /// </summary>

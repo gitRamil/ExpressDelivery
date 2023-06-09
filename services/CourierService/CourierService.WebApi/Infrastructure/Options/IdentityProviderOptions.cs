@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace CourierService.WebApi.Infrastructure.Options;
+
 /// <summary>
 /// Представляет конфигурацию для IdentityProvider.
 /// </summary>

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc.Versioning;
 
 namespace CourierService.WebApi.Infrastructure.IoC;
+
 /// <summary>
 /// Содержит набор методов расширения для регистрации служб версионирования в контейнере внедрения зависимостей.
 /// </summary>

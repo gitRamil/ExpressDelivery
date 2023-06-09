@@ -2,6 +2,7 @@ using FluentValidation;
 using ValidationException = CourierService.Application.Exceptions.ValidationException;
 
 namespace CourierService.Application.Behaviors;
+
 /// <summary>
 /// Реализует сквозную функциональность по проверке достоверности <see cref="IRequest&lt;TResponse&gt;" />.
 /// </summary>
@@ -38,7 +39,7 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
             {
                 var errors = failures.GroupBy(e => e.PropertyName, e => e.ErrorMessage)
                                      .ToDictionary(failureGroup => failureGroup.Key, failureGroup => failureGroup.ToArray());
-                throw new Exceptions.ValidationException(errors);
+                throw new ValidationException(errors);
             }
         }
 

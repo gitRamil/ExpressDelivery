@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 
 namespace CourierService.WebApi.Infrastructure.IoC;
+
 /// <summary>
 /// Содержит набор методов расширения для регистрации служб аутентификации в контейнере внедрения зависимостей.
 /// </summary>

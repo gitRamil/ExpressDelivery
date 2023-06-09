@@ -1,6 +1,7 @@
 using CourierService.Application.Abstractions;
 
 namespace CourierService.WebApi.Infrastructure.Security;
+
 /// <summary>
 /// Представляет текущего пользователя.
 /// </summary>
@@ -22,17 +23,17 @@ public sealed class CurrentUser : ICurrentUser
     /// Возникает, если <paramref name="httpContextAccessor" />
     /// равен <c>false</c>.
     /// </exception>
-    public CurrentUser(IHttpContextAccessor httpContextAccessor)
-    {
-        _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
-    }
+    public CurrentUser(IHttpContextAccessor httpContextAccessor) => _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
     #endregion
 
     #region ICurrentUser members
     /// <summary>
     /// Возвращает идентификатор текущего пользователя.
     /// </summary>
-    /// <returns>Идентификатор текущего пользователя или <see cref="Guid.Empty" />, если пользователь является неаутентифицированным.</returns>
+    /// <returns>
+    /// Идентификатор текущего пользователя или <see cref="Guid.Empty" />, если пользователь является
+    /// неаутентифицированным.
+    /// </returns>
     public Guid Id
     {
         get

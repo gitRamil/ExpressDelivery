@@ -1,6 +1,7 @@
 using Domain.Core;
 
 namespace CourierService.Domain.ValueObjects;
+
 /// <summary>
 /// Представляет имя пользователя.
 /// </summary>

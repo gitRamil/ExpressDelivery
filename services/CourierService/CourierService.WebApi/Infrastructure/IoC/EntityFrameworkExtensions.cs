@@ -1,16 +1,17 @@
-using EntityFramework.Exceptions.PostgreSQL;
 using CourierService.Application.Abstractions;
 using CourierService.Infrastructure.Persistence;
+using EntityFramework.Exceptions.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
 
 namespace CourierService.WebApi.Infrastructure.IoC;
+
 /// <summary>
 /// Содержит набор методов расширения для регистрации служб Entity Framework в контейнере внедрения зависимостей.
 /// </summary>
 internal static class EntityFrameworkExtensions
 {
     /// <summary>
-    /// Добавляет автоматическую миграцию при запуске проекта. 
+    /// Добавляет автоматическую миграцию при запуске проекта.
     /// </summary>
     /// <param name="app">Ковнеер запросов приложения.</param>
     public static IApplicationBuilder AddAutomaticMigrations(this IApplicationBuilder app)
@@ -21,7 +22,7 @@ internal static class EntityFrameworkExtensions
         context.Database.Migrate();
         return app;
     }
-    
+
     /// <summary>
     /// Добавляет службы Entity Framework в контейнер внедрения зависимостей.
     /// </summary>

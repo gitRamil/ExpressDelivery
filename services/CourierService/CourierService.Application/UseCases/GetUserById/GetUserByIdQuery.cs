@@ -1,6 +1,7 @@
 using CourierService.Application.Dtos;
 
 namespace CourierService.Application.UseCases.GetUserById;
+
 /// <summary>
 /// Представляет запрос для получения пользователя.
 /// </summary>

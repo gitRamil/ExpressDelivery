@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Extensions.Options;
 
 namespace CourierService.WebApi.Infrastructure.Options;
+
 /// <summary>
 /// Представляет конфигурацию для <see cref="OpenIdConnectOptions" />.
 /// </summary>

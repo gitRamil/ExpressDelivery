@@ -3,6 +3,7 @@ using CourierService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CourierService.Infrastructure.Persistence;
+
 /// <summary>
 /// Представляет контекст для работы с БД.
 /// </summary>

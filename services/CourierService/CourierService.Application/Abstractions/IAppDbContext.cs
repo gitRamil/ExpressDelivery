@@ -2,6 +2,7 @@ using CourierService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CourierService.Application.Abstractions;
+
 /// <summary>
 /// Описывает контекст взаимодействия с БД.
 /// </summary>

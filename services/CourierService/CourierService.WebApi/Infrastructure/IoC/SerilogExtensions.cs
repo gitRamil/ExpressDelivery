@@ -1,6 +1,7 @@
 using Serilog;
 
 namespace CourierService.WebApi.Infrastructure.IoC;
+
 /// <summary>
 /// Содержит набор методов расширения для регистрации служб Serilog в контейнере внедрения зависимостей.
 /// </summary>
@@ -18,12 +19,11 @@ internal static class SerilogExtensions
     {
         ArgumentNullException.ThrowIfNull(nameof(builder));
 
-        Environment.SetEnvironmentVariable(nameof(AppDomain.CurrentDomain.BaseDirectory),
-                                           AppDomain.CurrentDomain.BaseDirectory);
-        Log.Logger = new LoggerConfiguration()
-                     .ReadFrom.Configuration(builder.Configuration)
-                     .Enrich.FromLogContext()
-                     .CreateLogger();
+        Environment.SetEnvironmentVariable(nameof(AppDomain.CurrentDomain.BaseDirectory), AppDomain.CurrentDomain.BaseDirectory);
+
+        Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(builder.Configuration)
+                                              .Enrich.FromLogContext()
+                                              .CreateLogger();
 
         builder.Host.UseSerilog();
 

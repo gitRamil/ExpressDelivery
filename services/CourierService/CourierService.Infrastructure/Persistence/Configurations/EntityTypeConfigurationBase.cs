@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CourierService.Infrastructure.Persistence.Configurations;
+
 /// <summary>
 /// Представляет базовую реализацию для настройки конфигурации объектно реляционного отображения для типа <see cref="T" />.
 /// </summary>

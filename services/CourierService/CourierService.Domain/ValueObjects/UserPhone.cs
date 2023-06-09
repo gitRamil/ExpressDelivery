@@ -1,8 +1,9 @@
-using Domain.Core;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using Domain.Core;
 
 namespace CourierService.Domain.ValueObjects;
+
 /// <summary>
 /// Представляет телефон пользователя.
 /// </summary>

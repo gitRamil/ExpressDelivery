@@ -1,7 +1,8 @@
-using Hellang.Middleware.ProblemDetails;
 using CourierService.Application.Exceptions;
+using Hellang.Middleware.ProblemDetails;
 
 namespace CourierService.WebApi.Infrastructure.IoC;
+
 /// <summary>
 /// Содержит набор методов расширения для регистрации служб ProblemDetails в контейнере внедрения зависимостей.
 /// </summary>

@@ -4,6 +4,7 @@ using CourierService.Domain.Entities;
 using Domain.Core.Primitives;
 
 namespace CourierService.Application.UseCases.DeleteUser;
+
 /// <summary>
 /// Представляет обработчик, осуществляющий удаление пользователя.
 /// </summary>

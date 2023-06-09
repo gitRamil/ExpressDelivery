@@ -2,6 +2,7 @@ using CourierService.Application.Behaviors;
 using MediatR;
 
 namespace CourierService.WebApi.Infrastructure.IoC;
+
 /// <summary>
 /// Содержит набор методов расширения для регистрации служб MediatR в контейнере внедрения зависимостей.
 /// </summary>
