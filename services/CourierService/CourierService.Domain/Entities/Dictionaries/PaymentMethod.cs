@@ -1,4 +1,5 @@
-﻿using Domain.Core;
+﻿using CourierService.Domain.ValueObjects.Dictionaries.PaymentMethod;
+using Domain.Core;
 using Domain.Core.Primitives;
 
 namespace CourierService.Domain.Entities.Dictionaries;
@@ -11,41 +12,41 @@ public class PaymentMethod : Entity<SequentialGuid>
     /// <summary>
     /// Возвращает метод оплаты: Карта.
     /// </summary>
-    public static readonly PaymentMethod Card = new(Guid.Parse("7373f370-6206-41c7-b4e7-91caddf1a35a"), "Card", 1);
+    public static readonly PaymentMethod Card = new(Guid.Parse("7373f370-6206-41c7-b4e7-91caddf1a35a"), new PaymentMethodName("Карта"), new PaymentMethodCode("card"));
 
     /// <summary>
     /// Возвращает метод оплаты: Наличные.
     /// </summary>
-    public static readonly PaymentMethod Cash = new(Guid.Parse("d353d9a8-b9e2-4b8e-9207-e898ef328b52"), "Cash", 0);
+    public static readonly PaymentMethod Cash = new(Guid.Parse("d353d9a8-b9e2-4b8e-9207-e898ef328b52"), new PaymentMethodName("Наличные"), new PaymentMethodCode("cash"));
 
     /// <summary>
     /// Возвращает метод оплаты: Онлайн.
     /// </summary>
-    public static readonly PaymentMethod Online = new(Guid.Parse("424b93cd-ca77-4bb5-b20b-e0f1201bc350"), "Online", 2);
+    public static readonly PaymentMethod Online = new(Guid.Parse("424b93cd-ca77-4bb5-b20b-e0f1201bc350"), new PaymentMethodName("Онлайн"), new PaymentMethodCode("online"));
 
-    public static readonly Dictionary<int, PaymentMethod> PaymentMethods = new()
+    public static readonly Dictionary<PaymentMethodCode, PaymentMethod> PaymentMethods = new()
     {
         [Card.Code] = Card,
         [Cash.Code] = Cash,
         [Online.Code] = Online
     };
 
-    public PaymentMethod(SequentialGuid id, string name, int code)
+    public PaymentMethod(SequentialGuid id, PaymentMethodName name, PaymentMethodCode code)
         : base(id)
     {
         Name = name ?? throw new ArgumentNullException(nameof(name));
-        Code = code;
+        Code = code ?? throw new ArgumentNullException(nameof(code));
     }
 
     /// <summary>
     /// Возвращает код метода оплаты.
     /// </summary>
-    public int Code { get; set; }
+    public PaymentMethodCode Code { get; set; }
 
     /// <summary>
     /// Возвращает название метода оплаты.
     /// </summary>
-    public string Name { get; set; }
+    public PaymentMethodName Name { get; set; }
 
     /// <summary>
     /// Возвращает метод оплаты заказа, связанный с данным кодом.
@@ -57,7 +58,7 @@ public class PaymentMethod : Entity<SequentialGuid>
     /// <exception cref="InvalidOperationException">
     /// Возникает, если не удалось найти <see cref="PaymentMethod" /> по указанному <paramref name="code" />.
     /// </exception>
-    public static PaymentMethod FromValue(int code)
+    public static PaymentMethod FromValue(PaymentMethodCode code)
     {
         if (PaymentMethods.TryGetValue(code, out var creationReason))
         {

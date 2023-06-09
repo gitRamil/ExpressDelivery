@@ -70,21 +70,28 @@ namespace CourierService.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<int>("Code")
-                        .HasColumnType("integer")
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("code")
-                        .HasComment("Код статуса");
+                        .HasComment("Код");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("name")
-                        .HasComment("Название статуса");
+                        .HasComment("Наименование");
 
                     b.HasKey("Id")
                         .HasName("pk_order_statuses");
 
-                    b.ToTable("orderStatuses", null, t =>
+                    b.HasIndex("Code")
+                        .IsUnique()
+                        .HasDatabaseName("ix_order_statuses_code");
+
+                    b.ToTable("order_statuses", null, t =>
                         {
                             t.HasComment("Статус заказа");
                         });
@@ -93,26 +100,26 @@ namespace CourierService.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("4fdc6d99-f3fd-49ee-8af9-6ac5531cc40e"),
-                            Code = 1,
-                            Name = "CourierAssigned"
+                            Code = "courier_assigned",
+                            Name = "Курьер назначен"
                         },
                         new
                         {
                             Id = new Guid("b63c138c-c36b-4bb1-8dad-b3770512b858"),
-                            Code = 0,
-                            Name = "Created"
+                            Code = "created",
+                            Name = "Заказ создан"
                         },
                         new
                         {
                             Id = new Guid("9171b0ee-7091-4dee-95aa-59c5522a21fd"),
-                            Code = 3,
-                            Name = "Done"
+                            Code = "done",
+                            Name = "Заказ завершен"
                         },
                         new
                         {
                             Id = new Guid("32ba2971-2a5e-435b-87c7-f8022e901c63"),
-                            Code = 2,
-                            Name = "InProgress"
+                            Code = "in_progress",
+                            Name = "Заказ в процессе"
                         });
                 });
 
@@ -122,21 +129,28 @@ namespace CourierService.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<int>("Code")
-                        .HasColumnType("integer")
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("code")
                         .HasComment("Код");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("name")
-                        .HasComment("Название");
+                        .HasComment("Наименование");
 
                     b.HasKey("Id")
                         .HasName("pk_payment_methods");
 
-                    b.ToTable("paymentMethods", null, t =>
+                    b.HasIndex("Code")
+                        .IsUnique()
+                        .HasDatabaseName("ix_payment_methods_code");
+
+                    b.ToTable("payment_methods", null, t =>
                         {
                             t.HasComment("Метод оплаты заказа");
                         });
@@ -145,20 +159,20 @@ namespace CourierService.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("7373f370-6206-41c7-b4e7-91caddf1a35a"),
-                            Code = 1,
-                            Name = "Card"
+                            Code = "card",
+                            Name = "Карта"
                         },
                         new
                         {
                             Id = new Guid("d353d9a8-b9e2-4b8e-9207-e898ef328b52"),
-                            Code = 0,
-                            Name = "Cash"
+                            Code = "cash",
+                            Name = "Наличные"
                         },
                         new
                         {
                             Id = new Guid("424b93cd-ca77-4bb5-b20b-e0f1201bc350"),
-                            Code = 2,
-                            Name = "Online"
+                            Code = "online",
+                            Name = "Онлайн"
                         });
                 });
 
@@ -168,19 +182,26 @@ namespace CourierService.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<int>("Code")
-                        .HasColumnType("integer")
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("code")
                         .HasComment("Код");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("name")
-                        .HasComment("Название");
+                        .HasComment("Наименование");
 
                     b.HasKey("Id")
                         .HasName("pk_rights");
+
+                    b.HasIndex("Code")
+                        .IsUnique()
+                        .HasDatabaseName("ix_rights_code");
 
                     b.ToTable("rights", null, t =>
                         {
@@ -191,20 +212,20 @@ namespace CourierService.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("3dfcd6f3-1775-4e1b-91db-fdccea3f83eb"),
-                            Code = 1,
-                            Name = "Admin"
+                            Code = "admin",
+                            Name = "Администратор"
                         },
                         new
                         {
                             Id = new Guid("60eb98f3-9f8c-4c12-93d4-66f208caa6f6"),
-                            Code = 2,
-                            Name = "Courier"
+                            Code = "courier",
+                            Name = "Курьер"
                         },
                         new
                         {
                             Id = new Guid("e10222c4-7723-498b-8bf4-83252378e0c9"),
-                            Code = 0,
-                            Name = "User"
+                            Code = "user",
+                            Name = "Пользователь"
                         });
                 });
 
@@ -335,7 +356,7 @@ namespace CourierService.Infrastructure.Migrations
                     b.HasKey("Id")
                         .HasName("pk_package_information");
 
-                    b.ToTable("packageInformation", null, t =>
+                    b.ToTable("package_information", null, t =>
                         {
                             t.HasComment("Информация о посылке");
                         });

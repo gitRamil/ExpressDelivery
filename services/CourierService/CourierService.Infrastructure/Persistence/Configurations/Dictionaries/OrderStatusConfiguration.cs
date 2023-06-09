@@ -1,4 +1,5 @@
 ﻿using CourierService.Domain.Entities.Dictionaries;
+using CourierService.Domain.ValueObjects.Dictionaries.OrderStatus;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -15,13 +16,22 @@ internal class OrderStatusConfiguration : EntityTypeConfigurationBase<OrderStatu
     /// <param name="builder">Строитель, используемый при конфигурации сущности.</param>
     protected override void OnConfigure(EntityTypeBuilder<OrderStatus> builder)
     {
-        builder.ToTable("orderStatuses", t => t.HasComment("Статус заказа"));
-
-        builder.Property(p => p.Code)
-               .HasComment("Код статуса");
+        builder.ToTable("order_statuses", t => t.HasComment("Статус заказа"));
 
         builder.Property(p => p.Name)
-               .HasComment("Название статуса");
+               .IsRequired()
+               .HasMaxLength(OrderStatusName.MaxLength)
+               .HasComment("Наименование")
+               .HasConversion(o => (string)o, s => new OrderStatusName(s));
+
+        builder.Property(p => p.Code)
+               .IsRequired()
+               .HasMaxLength(OrderStatusCode.MaxLength)
+               .HasComment("Код")
+               .HasConversion(o => (string)o, s => new OrderStatusCode(s));
+
+        builder.HasIndex(p => p.Code)
+               .IsUnique();
 
         builder.HasData(OrderStatus.CourierAssigned, OrderStatus.Created, OrderStatus.Done, OrderStatus.InProgress);
     }

@@ -14,12 +14,12 @@ namespace CourierService.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "orderStatuses",
+                name: "order_statuses",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    code = table.Column<int>(type: "integer", nullable: false, comment: "Код статуса"),
-                    name = table.Column<string>(type: "text", nullable: false, comment: "Название статуса")
+                    code = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false, comment: "Код"),
+                    name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Наименование")
                 },
                 constraints: table =>
                 {
@@ -28,7 +28,7 @@ namespace CourierService.Infrastructure.Migrations
                 comment: "Статус заказа");
 
             migrationBuilder.CreateTable(
-                name: "packageInformation",
+                name: "package_information",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -43,12 +43,12 @@ namespace CourierService.Infrastructure.Migrations
                 comment: "Информация о посылке");
 
             migrationBuilder.CreateTable(
-                name: "paymentMethods",
+                name: "payment_methods",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    code = table.Column<int>(type: "integer", nullable: false, comment: "Код"),
-                    name = table.Column<string>(type: "text", nullable: false, comment: "Название")
+                    code = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false, comment: "Код"),
+                    name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Наименование")
                 },
                 constraints: table =>
                 {
@@ -61,8 +61,8 @@ namespace CourierService.Infrastructure.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    code = table.Column<int>(type: "integer", nullable: false, comment: "Код"),
-                    name = table.Column<string>(type: "text", nullable: false, comment: "Название")
+                    code = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false, comment: "Код"),
+                    name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Наименование")
                 },
                 constraints: table =>
                 {
@@ -151,19 +151,19 @@ namespace CourierService.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "fk_orders_order_statuses_order_status_id",
                         column: x => x.order_status_id,
-                        principalTable: "orderStatuses",
+                        principalTable: "order_statuses",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_orders_package_information_package_information_id",
                         column: x => x.package_information_id,
-                        principalTable: "packageInformation",
+                        principalTable: "package_information",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_orders_payment_methods_payment_method_id",
                         column: x => x.payment_method_id,
-                        principalTable: "paymentMethods",
+                        principalTable: "payment_methods",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -180,24 +180,24 @@ namespace CourierService.Infrastructure.Migrations
                 comment: "Заказ");
 
             migrationBuilder.InsertData(
-                table: "orderStatuses",
+                table: "order_statuses",
                 columns: new[] { "id", "code", "name" },
                 values: new object[,]
                 {
-                    { new Guid("32ba2971-2a5e-435b-87c7-f8022e901c63"), 2, "InProgress" },
-                    { new Guid("4fdc6d99-f3fd-49ee-8af9-6ac5531cc40e"), 1, "CourierAssigned" },
-                    { new Guid("9171b0ee-7091-4dee-95aa-59c5522a21fd"), 3, "Done" },
-                    { new Guid("b63c138c-c36b-4bb1-8dad-b3770512b858"), 0, "Created" }
+                    { new Guid("32ba2971-2a5e-435b-87c7-f8022e901c63"), "in_progress", "Заказ в процессе" },
+                    { new Guid("4fdc6d99-f3fd-49ee-8af9-6ac5531cc40e"), "courier_assigned", "Курьер назначен" },
+                    { new Guid("9171b0ee-7091-4dee-95aa-59c5522a21fd"), "done", "Заказ завершен" },
+                    { new Guid("b63c138c-c36b-4bb1-8dad-b3770512b858"), "created", "Заказ создан" }
                 });
 
             migrationBuilder.InsertData(
-                table: "paymentMethods",
+                table: "payment_methods",
                 columns: new[] { "id", "code", "name" },
                 values: new object[,]
                 {
-                    { new Guid("424b93cd-ca77-4bb5-b20b-e0f1201bc350"), 2, "Online" },
-                    { new Guid("7373f370-6206-41c7-b4e7-91caddf1a35a"), 1, "Card" },
-                    { new Guid("d353d9a8-b9e2-4b8e-9207-e898ef328b52"), 0, "Cash" }
+                    { new Guid("424b93cd-ca77-4bb5-b20b-e0f1201bc350"), "online", "Онлайн" },
+                    { new Guid("7373f370-6206-41c7-b4e7-91caddf1a35a"), "card", "Карта" },
+                    { new Guid("d353d9a8-b9e2-4b8e-9207-e898ef328b52"), "cash", "Наличные" }
                 });
 
             migrationBuilder.InsertData(
@@ -205,15 +205,21 @@ namespace CourierService.Infrastructure.Migrations
                 columns: new[] { "id", "code", "name" },
                 values: new object[,]
                 {
-                    { new Guid("3dfcd6f3-1775-4e1b-91db-fdccea3f83eb"), 1, "Admin" },
-                    { new Guid("60eb98f3-9f8c-4c12-93d4-66f208caa6f6"), 2, "Courier" },
-                    { new Guid("e10222c4-7723-498b-8bf4-83252378e0c9"), 0, "User" }
+                    { new Guid("3dfcd6f3-1775-4e1b-91db-fdccea3f83eb"), "admin", "Администратор" },
+                    { new Guid("60eb98f3-9f8c-4c12-93d4-66f208caa6f6"), "courier", "Курьер" },
+                    { new Guid("e10222c4-7723-498b-8bf4-83252378e0c9"), "user", "Пользователь" }
                 });
 
             migrationBuilder.CreateIndex(
                 name: "ix_couriers_user_id",
                 table: "couriers",
                 column: "user_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_order_statuses_code",
+                table: "order_statuses",
+                column: "code",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_orders_courier_id",
@@ -246,6 +252,18 @@ namespace CourierService.Infrastructure.Migrations
                 column: "sender_id");
 
             migrationBuilder.CreateIndex(
+                name: "ix_payment_methods_code",
+                table: "payment_methods",
+                column: "code",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "ix_rights_code",
+                table: "rights",
+                column: "code",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "ix_users_right_id",
                 table: "users",
                 column: "right_id");
@@ -261,13 +279,13 @@ namespace CourierService.Infrastructure.Migrations
                 name: "couriers");
 
             migrationBuilder.DropTable(
-                name: "orderStatuses");
+                name: "order_statuses");
 
             migrationBuilder.DropTable(
-                name: "packageInformation");
+                name: "package_information");
 
             migrationBuilder.DropTable(
-                name: "paymentMethods");
+                name: "payment_methods");
 
             migrationBuilder.DropTable(
                 name: "users");

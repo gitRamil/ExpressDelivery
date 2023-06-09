@@ -1,4 +1,5 @@
 ﻿using CourierService.Domain.Entities.Dictionaries;
+using CourierService.Domain.ValueObjects.Dictionaries.Right;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,11 +18,20 @@ internal class RightConfiguration : EntityTypeConfigurationBase<Right>
     {
         builder.ToTable("rights", t => t.HasComment("Права"));
 
-        builder.Property(p => p.Code)
-               .HasComment("Код");
-
         builder.Property(p => p.Name)
-               .HasComment("Название");
+               .IsRequired()
+               .HasMaxLength(RightName.MaxLength)
+               .HasComment("Наименование")
+               .HasConversion(o => (string)o, s => new RightName(s));
+
+        builder.Property(p => p.Code)
+               .IsRequired()
+               .HasMaxLength(RightCode.MaxLength)
+               .HasComment("Код")
+               .HasConversion(o => (string)o, s => new RightCode(s));
+
+        builder.HasIndex(p => p.Code)
+               .IsUnique();
 
         builder.HasData(Right.Admin, Right.Courier, Right.User);
     }

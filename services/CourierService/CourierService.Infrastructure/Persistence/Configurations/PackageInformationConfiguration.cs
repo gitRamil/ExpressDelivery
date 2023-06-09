@@ -15,7 +15,7 @@ internal class PackageInformationConfiguration : EntityTypeConfigurationBase<Pac
     /// <param name="builder">Строитель, используемый при конфигурации сущности.</param>
     protected override void OnConfigure(EntityTypeBuilder<PackageInformation> builder)
     {
-        builder.ToTable("packageInformation", t => t.HasComment("Информация о посылке"));
+        builder.ToTable("package_information", t => t.HasComment("Информация о посылке"));
 
         builder.Property(p => p.Cost)
                .HasComment("Цена")
