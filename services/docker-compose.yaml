@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:14
+    container_name: "postgres"
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: "courier-service"
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+    ports:
+      - "9055:5432"
+    networks:
+      - express-delivery
+  seq:
+    image: datalust/seq
+    container_name: "express-delivery-seq"
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+    ports:
+      - "9051:80"
+    networks:
+      - express-delivery
+  dockerapi:
+    image: dockerapi:latest
+    depends_on:
+      - "db"
+    build:
+      context: ./CourierService
+      dockerfile: /Dockerfile
+    ports:
+      - "8000:80"
+    environment:
+      courier-service: "host=host.docker.internal;port=9055;Database=courier-service;Username=postgres;Password=postgres;Pooling=true"
+    networks:
+      - express-delivery
+volumes:
+  db-data:
+    name: postgres-data
+
+networks:
+  express-delivery:
+    driver: bridge
