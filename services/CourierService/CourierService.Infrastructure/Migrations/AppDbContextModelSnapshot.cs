@@ -31,21 +31,24 @@ namespace CourierService.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<string>("E")
-                        .HasColumnType("text")
-                        .HasColumnName("e")
-                        .HasComment("Координаты E");
+                    b.Property<string>("Latitude")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
+                        .HasColumnName("latitude")
+                        .HasComment("Координаты широты");
 
-                    b.Property<string>("S")
-                        .HasColumnType("text")
-                        .HasColumnName("s")
-                        .HasComment("Координаты S");
+                    b.Property<string>("Longitude")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
+                        .HasColumnName("longitude")
+                        .HasComment("Координаты долготы");
 
                     b.Property<string>("TelegramUserName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("telegram_user_name")
-                        .HasComment("Ник телеграм");
+                        .HasComment("Ник телеграмм");
 
                     b.Property<Guid>("user_id")
                         .HasColumnType("uuid")

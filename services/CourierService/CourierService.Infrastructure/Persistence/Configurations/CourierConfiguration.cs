@@ -1,4 +1,6 @@
 ﻿using CourierService.Domain.Entities;
+using CourierService.Domain.ValueObjects.Courier;
+using CourierService.Domain.ValueObjects.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,14 +19,20 @@ internal class CourierConfiguration : EntityTypeConfigurationBase<Courier>
     {
         builder.ToTable("couriers", t => t.HasComment("Курьеры"));
 
-        builder.Property(p => p.S)
-               .HasComment("Координаты S");
+        builder.Property(p => p.Longitude)
+               .HasMaxLength(CourierLongitude.MaxLength)
+               .HasConversion(o => (string?)o, s => (CourierLongitude?)s)
+               .HasComment("Координаты долготы");
 
-        builder.Property(p => p.E)
-               .HasComment("Координаты E");
+        builder.Property(p => p.Latitude)
+               .HasMaxLength(CourierLatitude.MaxLength)
+               .HasConversion(o => (string?)o, s => (CourierLatitude?)s)
+               .HasComment("Координаты широты");
 
         builder.Property(p => p.TelegramUserName)
-               .HasComment("Ник телеграм");
+               .HasMaxLength(CourierTelegramUserName.MaxLength)
+               .HasConversion(o => (string)o, s => (CourierTelegramUserName)s)
+               .HasComment("Ник телеграмм");
 
         builder.HasOne(p => p.User)
                .WithMany()

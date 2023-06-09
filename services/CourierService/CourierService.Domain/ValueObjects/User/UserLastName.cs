@@ -27,6 +27,8 @@ public sealed class UserLastName : ValueObject
         {
             throw new ArgumentException("Фамилия сотрудника не может быть null или пустой строкой.", nameof(lastName));
         }
+        
+        lastName = lastName.Trim();
 
         if (lastName.Length > MaxLength)
         {

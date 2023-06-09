@@ -1,4 +1,5 @@
-﻿using Domain.Core;
+﻿using CourierService.Domain.ValueObjects.Courier;
+using Domain.Core;
 using Domain.Core.Primitives;
 
 namespace CourierService.Domain.Entities;
@@ -8,7 +9,7 @@ namespace CourierService.Domain.Entities;
 /// </summary>
 public class Courier : Entity<SequentialGuid>
 {
-    public Courier(SequentialGuid id, User user, string telegramUserName)
+    public Courier(SequentialGuid id, User user, CourierTelegramUserName telegramUserName)
         : base(id)
     {
         User = user ?? throw new ArgumentNullException(nameof(user));
@@ -27,19 +28,19 @@ public class Courier : Entity<SequentialGuid>
     }
 
     /// <summary>
-    /// Возвращает координаты пользователя.
+    /// Возвращает координату широты курьера.
     /// </summary>
-    public string? E { get; set; }
+    public CourierLatitude? Latitude { get; set; }
 
     /// <summary>
-    /// Возвращает координаты пользователя.
+    /// Возвращает координату долготы курьера.
     /// </summary>
-    public string? S { get; set; }
+    public CourierLongitude? Longitude { get; set; }
 
     /// <summary>
     /// Возвращает пользователя.
     /// </summary>
-    public string TelegramUserName { get; }
+    public CourierTelegramUserName TelegramUserName { get; }
 
     /// <summary>
     /// Возвращает пользователя.

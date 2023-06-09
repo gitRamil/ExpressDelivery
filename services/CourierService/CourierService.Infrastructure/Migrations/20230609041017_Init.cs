@@ -104,9 +104,9 @@ namespace CourierService.Infrastructure.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    e = table.Column<string>(type: "text", nullable: true, comment: "Координаты E"),
-                    s = table.Column<string>(type: "text", nullable: true, comment: "Координаты S"),
-                    telegram_user_name = table.Column<string>(type: "text", nullable: false, comment: "Ник телеграм"),
+                    latitude = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: true, comment: "Координаты широты"),
+                    longitude = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: true, comment: "Координаты долготы"),
+                    telegram_user_name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Ник телеграмм"),
                     user_id = table.Column<Guid>(type: "uuid", nullable: false, comment: "Идентификатор пользователя")
                 },
                 constraints: table =>
