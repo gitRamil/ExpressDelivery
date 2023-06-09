@@ -9,6 +9,14 @@ namespace CourierService.Application.Abstractions;
 public interface IAppDbContext
 {
     /// <summary>
+    /// Возвращает набор заказов.
+    /// </summary>
+    /// <value>
+    /// Заказы.
+    /// </value>
+    DbSet<Order> Orders { get; }
+
+    /// <summary>
     /// Возвращает набор пользователей.
     /// </summary>
     /// <value>

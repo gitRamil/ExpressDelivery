@@ -48,7 +48,7 @@ internal class OrderConfiguration : EntityTypeConfigurationBase<Order>
 
         builder.Property(p => p.TrackNumber)
                .HasMaxLength(OrderTrackNumber.MaxLength)
-               .HasConversion(o => (string?)o, s => (OrderTrackNumber?)s)
+               .HasConversion(o => (string)o, s => (OrderTrackNumber)s)
                .HasComment("Номер отслеживания");
 
         builder.HasOne(p => p.Courier)

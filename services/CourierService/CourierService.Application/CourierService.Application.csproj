@@ -37,4 +37,8 @@
         <ProjectReference Include="..\CourierService.Domain\CourierService.Domain.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <Folder Include="UseCases\Dtos\"/>
+    </ItemGroup>
+
 </Project>

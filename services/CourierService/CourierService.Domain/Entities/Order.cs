@@ -11,7 +11,7 @@ namespace CourierService.Domain.Entities;
 public class Order : Entity<SequentialGuid>
 {
     public Order(SequentialGuid id,
-                 User sender,
+                 // User sender,
                  OrderSenderName senderName,
                  OrderSenderAddress senderAddress,
                  OrderReceiverName receiverName,
@@ -22,7 +22,7 @@ public class Order : Entity<SequentialGuid>
                  OrderStatus orderStatus)
         : base(id)
     {
-        Sender = sender ?? throw new ArgumentNullException(nameof(sender));
+        // Sender = sender ?? throw new ArgumentNullException(nameof(sender));
         SenderName = senderName ?? throw new ArgumentNullException(nameof(senderName));
         SenderAddress = senderAddress ?? throw new ArgumentNullException(nameof(senderAddress));
         ReceiverName = receiverName ?? throw new ArgumentNullException(nameof(receiverName));
@@ -40,7 +40,7 @@ public class Order : Entity<SequentialGuid>
     protected Order()
         : base(SequentialGuid.Empty)
     {
-        Sender = null!;
+        // Sender = null!;
         SenderName = null!;
         SenderAddress = null!;
         ReceiverName = null!;
@@ -113,5 +113,6 @@ public class Order : Entity<SequentialGuid>
     /// <summary>
     /// Возвращает трек номер.
     /// </summary>
-    public OrderTrackNumber? TrackNumber { get; }
+    public OrderTrackNumber TrackNumber { get; } = new(SequentialGuid.Create()
+                                                                     .ToString());
 }
