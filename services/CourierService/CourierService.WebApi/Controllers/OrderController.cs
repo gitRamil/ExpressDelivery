@@ -1,6 +1,7 @@
 ﻿using CourierService.Application.Dtos;
 using CourierService.Application.UseCases.CreateOrder;
 using CourierService.Application.UseCases.GetOrder;
+using CourierService.Application.UseCases.GetUserOrders;
 using MediatR;
 
 namespace CourierService.WebApi.Controllers;
@@ -49,6 +50,20 @@ public class OrderController : ControllerBase
     public async Task<IActionResult> GetOrder(Guid trackNumber, CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(new GetOrderQuery(trackNumber), cancellationToken);
+        return Ok(result);
+    }
+
+    /// <summary>
+    /// Получает заказы сотрудника.
+    /// </summary>
+    /// <param name="query">Запрос на получение заказов пользователя.</param>
+    /// <param name="cancellationToken">Маркер отмены.</param>
+    [HttpGet("user-orders")]
+    [ProducesResponseType(typeof(OrderDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetUserOrders([FromQuery] GetUserOrdersQuery query, CancellationToken cancellationToken)
+    {
+        var result = await _mediator.Send(query, cancellationToken);
         return Ok(result);
     }
 }
