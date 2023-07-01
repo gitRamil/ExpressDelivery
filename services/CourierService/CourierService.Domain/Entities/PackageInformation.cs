@@ -1,6 +1,5 @@
 ﻿using CourierService.Domain.Core;
 using CourierService.Domain.ValueObjects.PackageInformation;
-using Domain.Core;
 using Domain.Core.Primitives;
 
 namespace CourierService.Domain.Entities;

@@ -1,7 +1,6 @@
 using CourierService.Domain.Core;
 using CourierService.Domain.Entities.Dictionaries;
 using CourierService.Domain.ValueObjects.User;
-using Domain.Core;
 using Domain.Core.Primitives;
 
 namespace CourierService.Domain.Entities;

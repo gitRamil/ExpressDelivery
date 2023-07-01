@@ -3,11 +3,9 @@ using CourierService.Application.Abstractions;
 using CourierService.Application.Dtos;
 using CourierService.Application.Exceptions;
 using CourierService.Application.Extensions;
-using CourierService.Application.UseCases.GetOrder;
-using CourierService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CourierService.Application.UseCases.GetUserOrders; 
+namespace CourierService.Application.UseCases.GetUserOrders;
 
 /// <summary>
 /// Представляет обработчик запроса на получение заказов пользователя.

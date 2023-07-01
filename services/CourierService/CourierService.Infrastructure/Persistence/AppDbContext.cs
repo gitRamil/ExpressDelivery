@@ -1,4 +1,5 @@
 using CourierService.Application.Abstractions;
+using CourierService.Domain.Core;
 using CourierService.Domain.Entities;
 using CourierService.Domain.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,26 @@ public sealed class AppDbContext : DbContext, IAppDbContext
 
     /// <inheritdoc />
     public DbSet<Order> Orders => Set<Order>();
+
+    /// <inheritdoc cref="DbContext" />
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
+    {
+        foreach (var entry in ChangeTracker.Entries()
+                                           .Where(x => x.Entity is ITrackedEntity))
+        {
+            if (entry.State == EntityState.Added)
+            {
+                ((ITrackedEntity)entry.Entity).SetCreatedDate();
+                ((ITrackedEntity)entry.Entity).SetUpdatedDate();
+            }
+            else if (entry.State == EntityState.Modified)
+            {
+                ((ITrackedEntity)entry.Entity).SetUpdatedDate();
+            }
+        }
+
+        return base.SaveChangesAsync(cancellationToken);
+    }
 
     /// <inheritdoc />
     public DbSet<User> Users => Set<User>();

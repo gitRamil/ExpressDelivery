@@ -2,13 +2,17 @@
 
 namespace CourierService.Domain.Core;
 
-
 /// <summary>
 /// Представляет Entity в терминологии Ddd.
 /// </summary>
 /// <typeparam name="TId">Тип идентификатора.</typeparam>
 public abstract class TrackedEntity<TId> : Entity<TId>, ITrackedEntity
 {
+    protected TrackedEntity(TId id)
+        : base(id!)
+    {
+    }
+
     /// <summary>
     /// Возвращает дату и время создания сущности.
     /// </summary>
@@ -28,9 +32,4 @@ public abstract class TrackedEntity<TId> : Entity<TId>, ITrackedEntity
     /// Возвращает дату и время обновления сущности.
     /// </summary>
     public DateTimeOffset UpdatedDate { get; private set; }
-
-    protected TrackedEntity(TId id)
-        : base(id!)
-    {
-    }
 }

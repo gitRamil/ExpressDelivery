@@ -7,7 +7,7 @@ namespace CourierService.Domain.Entities;
 /// <summary>
 /// Представляет сущность курьера.
 /// </summary>
-public class Courier : TrackedEntity<SequentialGuid> 
+public class Courier : TrackedEntity<SequentialGuid>
 {
     public Courier(SequentialGuid id, User user, CourierTelegramUserName telegramUserName)
         : base(id)

@@ -1,6 +1,5 @@
 ﻿using CourierService.Domain.Core;
 using CourierService.Domain.ValueObjects.Dictionaries.Right;
-using Domain.Core;
 using Domain.Core.Primitives;
 
 namespace CourierService.Domain.Entities.Dictionaries;
