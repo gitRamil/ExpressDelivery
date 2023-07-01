@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "TestTemplate",
+  "classifications": [
+    "WebApi",
+    "Microservice",
+  ],
+  "identity": "ASP.NET Core WebApi Microservice",
+  "name": "ASP.NET Core Web Api (Microservice)",
+  "description": "A starter kit for Asp.Net Core microservice-application.",
+  "shortName": "microserviceapplication",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "Microservice",
+  "preferNameDirectory": true,
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "Readme.md",
+        "Microservice.sln",
+        "Assets/**/**",
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        ".template.config/**/*",
+        ".vs/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*.lock.json",
+        "**/.git/**",
+        "*.nuspec"
+      ]
+    }
+  ]
+}
