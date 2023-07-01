@@ -31,6 +31,10 @@ namespace CourierService.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_date");
+
                     b.Property<string>("Latitude")
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)")
@@ -49,6 +53,10 @@ namespace CourierService.Infrastructure.Migrations
                         .HasColumnType("character varying(250)")
                         .HasColumnName("telegram_user_name")
                         .HasComment("Ник телеграмм");
+
+                    b.Property<DateTimeOffset>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_date");
 
                     b.Property<Guid>("user_id")
                         .HasColumnType("uuid")
@@ -80,12 +88,20 @@ namespace CourierService.Infrastructure.Migrations
                         .HasColumnName("code")
                         .HasComment("Код");
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_date");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)")
                         .HasColumnName("name")
                         .HasComment("Наименование");
+
+                    b.Property<DateTimeOffset>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_date");
 
                     b.HasKey("Id")
                         .HasName("pk_order_statuses");
@@ -104,25 +120,33 @@ namespace CourierService.Infrastructure.Migrations
                         {
                             Id = new Guid("4fdc6d99-f3fd-49ee-8af9-6ac5531cc40e"),
                             Code = "courier_assigned",
-                            Name = "Курьер назначен"
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Name = "Курьер назначен",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
                             Id = new Guid("b63c138c-c36b-4bb1-8dad-b3770512b858"),
                             Code = "created",
-                            Name = "Заказ создан"
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Name = "Заказ создан",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
                             Id = new Guid("9171b0ee-7091-4dee-95aa-59c5522a21fd"),
                             Code = "done",
-                            Name = "Заказ завершен"
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Name = "Заказ завершен",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
                             Id = new Guid("32ba2971-2a5e-435b-87c7-f8022e901c63"),
                             Code = "in_progress",
-                            Name = "Заказ в процессе"
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Name = "Заказ в процессе",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         });
                 });
 
@@ -139,12 +163,20 @@ namespace CourierService.Infrastructure.Migrations
                         .HasColumnName("code")
                         .HasComment("Код");
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_date");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)")
                         .HasColumnName("name")
                         .HasComment("Наименование");
+
+                    b.Property<DateTimeOffset>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_date");
 
                     b.HasKey("Id")
                         .HasName("pk_payment_methods");
@@ -163,19 +195,25 @@ namespace CourierService.Infrastructure.Migrations
                         {
                             Id = new Guid("7373f370-6206-41c7-b4e7-91caddf1a35a"),
                             Code = "card",
-                            Name = "Карта"
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Name = "Карта",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
                             Id = new Guid("d353d9a8-b9e2-4b8e-9207-e898ef328b52"),
                             Code = "cash",
-                            Name = "Наличные"
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Name = "Наличные",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
                             Id = new Guid("424b93cd-ca77-4bb5-b20b-e0f1201bc350"),
                             Code = "online",
-                            Name = "Онлайн"
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Name = "Онлайн",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         });
                 });
 
@@ -192,12 +230,20 @@ namespace CourierService.Infrastructure.Migrations
                         .HasColumnName("code")
                         .HasComment("Код");
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_date");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)")
                         .HasColumnName("name")
                         .HasComment("Наименование");
+
+                    b.Property<DateTimeOffset>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_date");
 
                     b.HasKey("Id")
                         .HasName("pk_rights");
@@ -216,19 +262,25 @@ namespace CourierService.Infrastructure.Migrations
                         {
                             Id = new Guid("3dfcd6f3-1775-4e1b-91db-fdccea3f83eb"),
                             Code = "admin",
-                            Name = "Администратор"
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Name = "Администратор",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
                             Id = new Guid("60eb98f3-9f8c-4c12-93d4-66f208caa6f6"),
                             Code = "courier",
-                            Name = "Курьер"
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Name = "Курьер",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
                             Id = new Guid("e10222c4-7723-498b-8bf4-83252378e0c9"),
                             Code = "user",
-                            Name = "Пользователь"
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Name = "Пользователь",
+                            UpdatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         });
                 });
 
@@ -237,6 +289,10 @@ namespace CourierService.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid")
                         .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_date");
 
                     b.Property<decimal?>("DeliveryCost")
                         .HasColumnType("numeric")
@@ -280,6 +336,10 @@ namespace CourierService.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("track_number")
                         .HasComment("Номер отслеживания");
+
+                    b.Property<DateTimeOffset>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_date");
 
                     b.Property<Guid?>("courier_id")
                         .HasColumnType("uuid")
@@ -349,12 +409,20 @@ namespace CourierService.Infrastructure.Migrations
                         .HasColumnName("cost")
                         .HasComment("Цена посылки");
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_date");
+
                     b.Property<string>("ShortDescription")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)")
                         .HasColumnName("short_description")
                         .HasComment("Краткое описание");
+
+                    b.Property<DateTimeOffset>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_date");
 
                     b.Property<int>("Weight")
                         .HasColumnType("integer")
@@ -375,6 +443,10 @@ namespace CourierService.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid")
                         .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_date");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -435,6 +507,10 @@ namespace CourierService.Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("token_expires")
                         .HasComment("Дата истечения токена");
+
+                    b.Property<DateTimeOffset>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_date");
 
                     b.Property<Guid>("right_id")
                         .HasColumnType("uuid")

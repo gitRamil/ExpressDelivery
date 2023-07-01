@@ -1,4 +1,5 @@
-﻿using CourierService.Domain.ValueObjects.PackageInformation;
+﻿using CourierService.Domain.Core;
+using CourierService.Domain.ValueObjects.PackageInformation;
 using Domain.Core;
 using Domain.Core.Primitives;
 
@@ -7,7 +8,7 @@ namespace CourierService.Domain.Entities;
 /// <summary>
 /// Представляет сущность с информацией о посылке.
 /// </summary>
-public class PackageInformation : Entity<SequentialGuid>
+public class PackageInformation : TrackedEntity<SequentialGuid>
 {
     public PackageInformation(SequentialGuid id, PackageInformationShortDescription shortDescription, PackageInformationWeight weight, PackageInformationCost cost)
         : base(id)

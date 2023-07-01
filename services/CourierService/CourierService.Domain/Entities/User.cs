@@ -1,3 +1,4 @@
+using CourierService.Domain.Core;
 using CourierService.Domain.Entities.Dictionaries;
 using CourierService.Domain.ValueObjects.User;
 using Domain.Core;
@@ -8,7 +9,7 @@ namespace CourierService.Domain.Entities;
 /// <summary>
 /// Представляет сущность пользователя.
 /// </summary>
-public class User : Entity<SequentialGuid>
+public class User : TrackedEntity<SequentialGuid>
 {
     /// <summary>
     /// Инициализирует новый экземпляр типа <see cref="User" />.

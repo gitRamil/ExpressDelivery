@@ -1,4 +1,5 @@
-﻿using CourierService.Domain.Entities.Dictionaries;
+﻿using CourierService.Domain.Core;
+using CourierService.Domain.Entities.Dictionaries;
 using CourierService.Domain.ValueObjects.Order;
 using Domain.Core;
 using Domain.Core.Primitives;
@@ -8,7 +9,7 @@ namespace CourierService.Domain.Entities;
 /// <summary>
 /// Представляет сущность заказа.
 /// </summary>
-public class Order : Entity<SequentialGuid>
+public class Order : TrackedEntity<SequentialGuid>
 {
     public Order(SequentialGuid id,
                  // User sender,

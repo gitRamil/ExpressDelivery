@@ -34,7 +34,7 @@ public record DataResult<T>
     /// Возвращает список элементов.
     /// </summary>
     public IReadOnlyList<T> Items { get; }
-    
+
     /// <summary>
     /// Возвращает общее число элементов.
     /// </summary>

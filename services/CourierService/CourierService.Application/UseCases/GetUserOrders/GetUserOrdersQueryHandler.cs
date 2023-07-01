@@ -2,18 +2,19 @@
 using CourierService.Application.Abstractions;
 using CourierService.Application.Dtos;
 using CourierService.Application.Exceptions;
+using CourierService.Application.Extensions;
 using CourierService.Application.UseCases.GetOrder;
 using CourierService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CourierService.Application.UseCases.GetUserOrders;
+namespace CourierService.Application.UseCases.GetUserOrders; 
 
 /// <summary>
 /// Представляет обработчик запроса на получение заказов пользователя.
 /// </summary>
 public class GetUserOrdersQueryHandler : IRequestHandler<GetUserOrdersQuery, IEnumerable<OrderDto>>
 {
-    private readonly IAppDbContext _context;
+    private readonly IAppDbContext _appDbContext;
     private readonly IMapper _mapper;
 
     /// <summary>
@@ -26,7 +27,7 @@ public class GetUserOrdersQueryHandler : IRequestHandler<GetUserOrdersQuery, IEn
     /// </exception>
     public GetUserOrdersQueryHandler(IAppDbContext context, IMapper mapper)
     {
-        _context = context ?? throw new ArgumentNullException(nameof(context));
+        _appDbContext = context ?? throw new ArgumentNullException(nameof(context));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
@@ -43,7 +44,11 @@ public class GetUserOrdersQueryHandler : IRequestHandler<GetUserOrdersQuery, IEn
     {
         ArgumentNullException.ThrowIfNull(request);
 
-        var orders = await _context.Orders.Where(order => true).ToListAsync(cancellationToken);
+        var query = _appDbContext.Orders.Where(order => true);
+
+        query = query.OrderBy(order => order.CreatedDate)
+                     .ApplyPagination(request.Skip, request.Take);
+        var orders = await query.ToListAsync(cancellationToken);
 
         return orders.Select(order => _mapper.Map<OrderDto>(order));
     }

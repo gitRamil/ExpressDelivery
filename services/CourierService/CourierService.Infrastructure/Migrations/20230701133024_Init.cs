@@ -19,7 +19,9 @@ namespace CourierService.Infrastructure.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     code = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false, comment: "Код"),
-                    name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Наименование")
+                    name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Наименование"),
+                    created_date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -34,7 +36,9 @@ namespace CourierService.Infrastructure.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     cost = table.Column<int>(type: "integer", nullable: false, comment: "Цена посылки"),
                     short_description = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Краткое описание"),
-                    weight = table.Column<int>(type: "integer", nullable: false, comment: "Вес посылки")
+                    weight = table.Column<int>(type: "integer", nullable: false, comment: "Вес посылки"),
+                    created_date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,7 +52,9 @@ namespace CourierService.Infrastructure.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     code = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false, comment: "Код"),
-                    name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Наименование")
+                    name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Наименование"),
+                    created_date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -62,7 +68,9 @@ namespace CourierService.Infrastructure.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     code = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false, comment: "Код"),
-                    name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Наименование")
+                    name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Наименование"),
+                    created_date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -85,7 +93,9 @@ namespace CourierService.Infrastructure.Migrations
                     refresh_token = table.Column<string>(type: "text", nullable: false, comment: "Рефреш-токен"),
                     right_id = table.Column<Guid>(type: "uuid", nullable: false, comment: "Идентификатор прав пользователя"),
                     token_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, comment: "Дата создания токена"),
-                    token_expires = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, comment: "Дата истечения токена")
+                    token_expires = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, comment: "Дата истечения токена"),
+                    created_date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,7 +117,9 @@ namespace CourierService.Infrastructure.Migrations
                     latitude = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: true, comment: "Координаты широты"),
                     longitude = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: true, comment: "Координаты долготы"),
                     telegram_user_name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Ник телеграмм"),
-                    user_id = table.Column<Guid>(type: "uuid", nullable: false, comment: "Идентификатор пользователя")
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false, comment: "Идентификатор пользователя"),
+                    created_date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -138,7 +150,9 @@ namespace CourierService.Infrastructure.Migrations
                     sender_id = table.Column<Guid>(type: "uuid", nullable: true, comment: "Идентификатор связанной цели"),
                     sender_address = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Адрес отправителя"),
                     sender_name = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false, comment: "Имя отправителя"),
-                    track_number = table.Column<Guid>(type: "uuid", nullable: false, comment: "Номер отслеживания")
+                    track_number = table.Column<Guid>(type: "uuid", nullable: false, comment: "Номер отслеживания"),
+                    created_date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -181,33 +195,33 @@ namespace CourierService.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "order_statuses",
-                columns: new[] { "id", "code", "name" },
+                columns: new[] { "id", "code", "created_date", "name", "updated_date" },
                 values: new object[,]
                 {
-                    { new Guid("32ba2971-2a5e-435b-87c7-f8022e901c63"), "in_progress", "Заказ в процессе" },
-                    { new Guid("4fdc6d99-f3fd-49ee-8af9-6ac5531cc40e"), "courier_assigned", "Курьер назначен" },
-                    { new Guid("9171b0ee-7091-4dee-95aa-59c5522a21fd"), "done", "Заказ завершен" },
-                    { new Guid("b63c138c-c36b-4bb1-8dad-b3770512b858"), "created", "Заказ создан" }
+                    { new Guid("32ba2971-2a5e-435b-87c7-f8022e901c63"), "in_progress", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "Заказ в процессе", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("4fdc6d99-f3fd-49ee-8af9-6ac5531cc40e"), "courier_assigned", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "Курьер назначен", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("9171b0ee-7091-4dee-95aa-59c5522a21fd"), "done", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "Заказ завершен", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("b63c138c-c36b-4bb1-8dad-b3770512b858"), "created", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "Заказ создан", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) }
                 });
 
             migrationBuilder.InsertData(
                 table: "payment_methods",
-                columns: new[] { "id", "code", "name" },
+                columns: new[] { "id", "code", "created_date", "name", "updated_date" },
                 values: new object[,]
                 {
-                    { new Guid("424b93cd-ca77-4bb5-b20b-e0f1201bc350"), "online", "Онлайн" },
-                    { new Guid("7373f370-6206-41c7-b4e7-91caddf1a35a"), "card", "Карта" },
-                    { new Guid("d353d9a8-b9e2-4b8e-9207-e898ef328b52"), "cash", "Наличные" }
+                    { new Guid("424b93cd-ca77-4bb5-b20b-e0f1201bc350"), "online", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "Онлайн", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("7373f370-6206-41c7-b4e7-91caddf1a35a"), "card", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "Карта", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("d353d9a8-b9e2-4b8e-9207-e898ef328b52"), "cash", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "Наличные", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) }
                 });
 
             migrationBuilder.InsertData(
                 table: "rights",
-                columns: new[] { "id", "code", "name" },
+                columns: new[] { "id", "code", "created_date", "name", "updated_date" },
                 values: new object[,]
                 {
-                    { new Guid("3dfcd6f3-1775-4e1b-91db-fdccea3f83eb"), "admin", "Администратор" },
-                    { new Guid("60eb98f3-9f8c-4c12-93d4-66f208caa6f6"), "courier", "Курьер" },
-                    { new Guid("e10222c4-7723-498b-8bf4-83252378e0c9"), "user", "Пользователь" }
+                    { new Guid("3dfcd6f3-1775-4e1b-91db-fdccea3f83eb"), "admin", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "Администратор", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("60eb98f3-9f8c-4c12-93d4-66f208caa6f6"), "courier", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "Курьер", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("e10222c4-7723-498b-8bf4-83252378e0c9"), "user", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "Пользователь", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)) }
                 });
 
             migrationBuilder.CreateIndex(

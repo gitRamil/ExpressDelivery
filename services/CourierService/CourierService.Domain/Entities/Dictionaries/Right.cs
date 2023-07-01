@@ -1,4 +1,5 @@
-﻿using CourierService.Domain.ValueObjects.Dictionaries.Right;
+﻿using CourierService.Domain.Core;
+using CourierService.Domain.ValueObjects.Dictionaries.Right;
 using Domain.Core;
 using Domain.Core.Primitives;
 
@@ -7,7 +8,7 @@ namespace CourierService.Domain.Entities.Dictionaries;
 /// <summary>
 /// Представляет сущность прав пользователя.
 /// </summary>
-public class Right : Entity<SequentialGuid>
+public class Right : TrackedEntity<SequentialGuid>
 {
     /// <summary>
     /// Возвращает право пользователя: Администратор.

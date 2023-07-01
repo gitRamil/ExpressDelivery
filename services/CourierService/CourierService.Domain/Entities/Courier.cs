@@ -1,5 +1,5 @@
-﻿using CourierService.Domain.ValueObjects.Courier;
-using Domain.Core;
+﻿using CourierService.Domain.Core;
+using CourierService.Domain.ValueObjects.Courier;
 using Domain.Core.Primitives;
 
 namespace CourierService.Domain.Entities;
@@ -7,7 +7,7 @@ namespace CourierService.Domain.Entities;
 /// <summary>
 /// Представляет сущность курьера.
 /// </summary>
-public class Courier : Entity<SequentialGuid>
+public class Courier : TrackedEntity<SequentialGuid> 
 {
     public Courier(SequentialGuid id, User user, CourierTelegramUserName telegramUserName)
         : base(id)
