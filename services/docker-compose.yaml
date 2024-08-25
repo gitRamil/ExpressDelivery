@@ -1,46 +1,88 @@
 version: "3.8"
 
 services:
+  #######################################################
+  # postgres
+  #######################################################
   db:
-    image: postgres:14
-    container_name: "postgres"
+    image: postgres:15.2
+    container_name: "ed-postgres"
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: "courier-service"
     volumes:
       - "db-data:/var/lib/postgresql/data"
     ports:
-      - "9055:5432"
+      - "9050:5432"
     networks:
-      - express-delivery
+      - ed
+  #######################################################
+  # seq
+  #######################################################
   seq:
     image: datalust/seq
-    container_name: "express-delivery-seq"
+    container_name: "ed-seq"
     restart: unless-stopped
+    mem_limit: 256m
     environment:
       ACCEPT_EULA: "Y"
     ports:
       - "9051:80"
     networks:
-      - express-delivery
-  dockerapi:
-    image: dockerapi:latest
-    depends_on:
-      - "db"
+      - ed
+  #######################################################
+  # rabbitmq
+  #######################################################
+  rabbitmq:
+    image: rabbitmq:3.11-alpine  
+    container_name: "ed-rabbitmq"
+    hostname: "ed-rabbit"
+    restart: unless-stopped
     build:
-      context: ./CourierService
-      dockerfile: /Dockerfile
-    ports:
-      - "8000:80"
+      context: .
+      dockerfile: ./rabbit.dockerfile
     environment:
-      courier-service: "host=host.docker.internal;port=9055;Database=courier-service;Username=postgres;Password=postgres;Pooling=true"
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    ports:
+      - '9061:5672'  # AMQP protocol port
+      - '9060:15672' # HTTP management UI
     networks:
-      - express-delivery
+      - ed
+    volumes:
+      - rmq-data:/var/lib/rabbitmq
+
+  #######################################################
+  # mailpit
+  #######################################################
+  mailpit:
+    image: axllent/mailpit:latest
+    hostname: "ed-mailpit"
+    container_name: "ed-mailpit"
+    restart: unless-stopped
+    environment:
+      MP_DATA_FILE: /data/mailpit.db
+      TZ: Europe/Moscow
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+      MP_WEBROOT: /mail
+      MP_MAX_MESSAGES: 50000
+    ports:
+      - "9062:1025" # smtp server
+      - "9063:8025" # web ui
+    networks:
+      - ed
+    volumes:
+      - mailpit-data:/data
+  
 volumes:
   db-data:
-    name: postgres-data
+    name: ed-postgres-data
+  rmq-data:
+    name: ed-rabbitmq-data
+  mailpit-data:
+    name: ed-mailpit-data
 
 networks:
-  express-delivery:
+  ed:
     driver: bridge
